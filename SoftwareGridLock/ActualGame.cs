@@ -40,7 +40,7 @@ namespace SoftwareGridLock
                 lines.Add(line); 
             }
 
-            Grid grid = Grid.LoadGame(lines); 
+            Grid grid = Grid.LoadGame(lines); //wow
 
         }
 
