@@ -48,11 +48,18 @@ namespace SoftwareGridLock
         {
             lblTimer.Text = "Time: " + ++time; //the ++ before time adds 1 to time before adding it to the label
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Grid grid = new Grid();
+            List<Block> blocks = Block.loadBlocks();
+            MessageBox.Show(grid.blocks[0]);
+        }
     }
 
     class Grid
     {
-        public static Grid LoadGame(List<String> lines)
+        public static Grid LoadGame(List<string> lines)
         {
             GreenBlock green = GreenBlock.FromString(lines.First());
             //MessageBox.Show("stub");
