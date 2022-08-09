@@ -51,9 +51,14 @@ namespace SoftwareGridLock
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Grid grid = new Grid();
-            List<Block> blocks = Block.loadBlocks();
-            MessageBox.Show(grid.blocks[0]);
+            //Grid grid = new Grid();
+            //List<Block> blocks = Block.loadBlocks();
+            //MessageBox.Show(grid.blocks[0]);
+        }
+
+        private void pictureBox5_Click(object sender, EventArgs e)
+        {
+
         }
     }
 
