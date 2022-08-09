@@ -13,8 +13,8 @@ namespace SoftwareGridLock
 {
     public partial class ActualGame : Form
     {
+        
 
-        PictureBox[,] groupBox1 = new PictureBox[7, 7];
         private int time = 0;
         //private List<char> fileList = new List<char>();
         public ActualGame()
@@ -33,13 +33,14 @@ namespace SoftwareGridLock
         private void readFile()
         {
 
-            StreamReader reader = new StreamReader(@"board1NoClass.csv"); //Opens the file
-            //List<string> lines = new List<string>(); //creates a list of lines
-            string line = reader.ReadLine();
-            //to store seperate lines
-            //while ((line = reader.ReadLine()) != null) { //reads each line until there is nothing in the new line
-                //lines.Add(line); 
-            //}
+            StreamReader reader = new StreamReader(@"board1.csv"); //Opens the file
+            List<string> lines = new List<string>(); //creates a list of lines
+            string line;                            //to store seperate lines
+            while ((line = reader.ReadLine()) != null) { //reads each line until there is nothing in the new line
+                lines.Add(line); 
+            }
+
+
         }
 
         private void Timer_Tick(object sender, EventArgs e)
@@ -50,5 +51,6 @@ namespace SoftwareGridLock
         private void button1_Click(object sender, EventArgs e)
         {
         }
+
     }
 }
