@@ -25,17 +25,17 @@ namespace SoftwareGridLock
         private void ActualGame_Load(object sender, EventArgs e)
         {
             Timer.Start();
-            readFile();
+            string[] fields = readFile(@"board1NoClass.csv").Split(',');
+
             //pictureBox1.BackColor = Color.Red;
 
         }
 
-        private void readFile()
+        private string readFile(string path)
         {
 
-            StreamReader reader = new StreamReader(@"board1NoClass.csv"); //Opens the file
-            string line = reader.ReadLine();
-
+            StreamReader reader = new StreamReader(path); //Opens the file 
+            return reader.ReadLine();
         }
 
         private void Timer_Tick(object sender, EventArgs e)
