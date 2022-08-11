@@ -33,13 +33,8 @@ namespace SoftwareGridLock
         private void readFile()
         {
 
-            StreamReader reader = new StreamReader(@"board1.csv"); //Opens the file
-            List<string> lines = new List<string>(); //creates a list of lines
-            string line;                            //to store seperate lines
-            while ((line = reader.ReadLine()) != null) { //reads each line until there is nothing in the new line
-                lines.Add(line); 
-            }
-
+            StreamReader reader = new StreamReader(@"board1NoClass.csv"); //Opens the file
+            string line = reader.ReadLine();
 
         }
 
