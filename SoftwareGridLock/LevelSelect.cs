@@ -12,6 +12,8 @@ namespace SoftwareGridLock
 {
     public partial class LevelSelect : Form
     {
+
+        public static string levelFile = @"board1NoClass.csv";
         public LevelSelect()
         {
             InitializeComponent();
@@ -23,6 +25,23 @@ namespace SoftwareGridLock
         }
 
         private void btnLvl1_Click(object sender, EventArgs e)
+        {
+            levelFile = @"board1NoClass.csv";
+            loadGame();
+        }
+
+        private void LevelSelect_Load(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void btnLvl2_Click(object sender, EventArgs e)
+        {
+            levelFile = @"board2NoClass.csv";
+            loadGame();
+        }
+
+        private void loadGame()
         {
             ActualGame actGame = new ActualGame();
             actGame.Show();

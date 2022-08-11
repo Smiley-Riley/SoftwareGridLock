@@ -100,6 +100,7 @@
             this.btnLvl2.TabIndex = 15;
             this.btnLvl2.Text = "Level 2";
             this.btnLvl2.UseVisualStyleBackColor = true;
+            this.btnLvl2.Click += new System.EventHandler(this.btnLvl2_Click);
             // 
             // btnLvl1
             // 
@@ -126,6 +127,7 @@
             this.Controls.Add(this.btnLvl1);
             this.Name = "LevelSelect";
             this.Text = "LevelSelect";
+            this.Load += new System.EventHandler(this.LevelSelect_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

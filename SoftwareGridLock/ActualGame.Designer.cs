@@ -746,7 +746,6 @@
             this.grpGameBoard.Size = new System.Drawing.Size(398, 410);
             this.grpGameBoard.TabIndex = 59;
             this.grpGameBoard.TabStop = false;
-            this.grpGameBoard.Text = "groupBox1";
             // 
             // ActualGame
             // 
