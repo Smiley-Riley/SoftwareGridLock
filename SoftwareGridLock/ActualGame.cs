@@ -103,7 +103,7 @@ namespace SoftwareGridLock
             //pictureBoxSelectedColour.BackColor = Color.FromName(colours[button - 1]);
             Color[] colours = readFileLine(LevelSelect.levelFile, 2).Split(',').Select(name => Color.FromName(name)).ToArray();
             pictureBoxSelectedColour.BackColor = colours[button - 1];
-        }
+        } 
         private void button1_Click(object sender, EventArgs e) { selectCar(1); }
         private void button2_Click(object sender, EventArgs e) { selectCar(2); }
         private void button3_Click(object sender, EventArgs e) { selectCar(3); }
