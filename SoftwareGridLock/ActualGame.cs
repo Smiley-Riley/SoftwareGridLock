@@ -17,11 +17,11 @@ namespace SoftwareGridLock
         PictureBox[,] gameBoard = new PictureBox[7, 7]; //Makes a 7x7 array that can store picture boxes
         Button[] colourSelect = new Button[10]; //Same but with buttons
 
-        /*Color[] colours = readFileLine(LevelSelect.levelFile, 2).Split(',').Select(name => Color.FromName(name)).ToArray();
-        Color[] colours = readFileLine(LevelSelect.levelFile, 2).Split(',').Select(name => Color.FromName(name)).ToArray();
-        Color[] colours = readFileLine(LevelSelect.levelFile, 2).Split(',').Select(name => Color.FromName(name)).ToArray();
-        Color[] colours = readFileLine(LevelSelect.levelFile, 2).Split(',').Select(name => Color.FromName(name)).ToArray();
-        */
+        Color[] boardLayout = readFileLine(LevelSelect.levelFile, 2).Split(',').Select(name => Color.FromName(name)).ToArray();
+        //Color[] colours = readFileLine(LevelSelect.levelFile, 2).Split(',').Select(name => Color.FromName(name)).ToArray();
+        //Color[] colours = readFileLine(LevelSelect.levelFile, 2).Split(',').Select(name => Color.FromName(name)).ToArray();
+        //Color[] colours = readFileLine(LevelSelect.levelFile, 2).Split(',').Select(name => Color.FromName(name)).ToArray();
+        
 
         private int time = 0;
         public ActualGame()
@@ -55,7 +55,7 @@ namespace SoftwareGridLock
             int startingColoursIndex = 0;
             for (int i = 0; i < numOfColours; i++)  //Colours all of the buttons that let you select the move colour
             {
-                colourSelect[i].BackColor = Color.FromName(colours[startingColoursIndex]);
+                colourSelect[i].BackColor = boardLayout[startingColoursIndex];/*Color.FromName(colours[startingColoursIndex]);*/
                 startingColoursIndex++;
             }
 
