@@ -13,8 +13,7 @@ namespace SoftwareGridLock
 {
     public partial class ActualGame : Form
     {
-        
-        
+
         public static Color[] startingConfig = readFileLine(LevelSelect.levelFile, 1).Split(',').Select(name => Color.FromName(name)).ToArray();
         public static Color[] colours = readFileLine(LevelSelect.levelFile, 2).Split(',').Select(name => Color.FromName(name)).ToArray();
         public static Color[] horizontalMove = readFileLine(LevelSelect.levelFile, 3).Split(',').Select(name => Color.FromName(name)).ToArray();
@@ -115,27 +114,28 @@ namespace SoftwareGridLock
             {
                 if (horizontalMove[i] == selectedColour)
                 {
-                    canMoveHorizontal = false;
+                    canMoveVertical = false;
+                    break;
                 }
-
             }
             for (int i = 0; i < verticalMove.Length; i++)
             {
                 if (verticalMove[i] == selectedColour)
                 {
-                    canMoveVertical = false;
+                    canMoveHorizontal = false;
+                    break;
                 }
             }
             bool canMove = true;
             List<int> arrayX = new List<int>(); //Two arrays that store the x and y positions of any blocks of the colour being moved while they're being checked
             List<int> arrayY = new List<int>(); 
 
-            if (canMoveVertical)
+            if (canMoveHorizontal)
             {
-                if (moveDirection == "up")
+                if (moveDirection == "right")
                 {
-                    for (int x = 0; x < 7; x++)
-                    {
+                    for (int x = 0; x < 7; x++) //I'm also now aware that the way the 2D array works is that the y is the horizontal axis and the x is the 
+                    {                           //vertical axis, but i'm too lazy to swap them arround so just accept it I guess
                         for (int y = 0; y < 7; y++)
                         {
                             if(pictureBoxSelectedColour.BackColor == gameBoard[x,y].BackColor) //Checks if that tile is the one you're looking to move
@@ -146,13 +146,12 @@ namespace SoftwareGridLock
                                 {
                                     if (gameBoard[x, y + 1].BackColor != gameBoard[x,y].BackColor && gameBoard[x, y + 1].BackColor != Color.White)
                                     {
-                                        canMove = false; //If the tile above each of the tiles in the car are not White or not the colour of the tile
+                                        canMove = false; //If the tile to the right of each of the tiles in the car are not White or not the colour of the tile
                                     }
                                 }
-
                                 if (y == 6)
                                 {
-                                    canMove = false; //If it's on the top level it can't move up
+                                    canMove = false; //If it's on the most right level it can't move right
                                 }
                             }
                         }
@@ -160,7 +159,7 @@ namespace SoftwareGridLock
 
 
                 }
-                if (moveDirection == "down")
+                if (moveDirection == "left")
                 {
                     for (int x = 0; x < 7; x++)
                     {
@@ -177,7 +176,6 @@ namespace SoftwareGridLock
                                         canMove = false; 
                                     }
                                 }
-
                                 if (y == 0)
                                 {
                                     canMove = false;
@@ -187,9 +185,9 @@ namespace SoftwareGridLock
                     }
                 }
             }
-            if (canMoveHorizontal)
+            if (canMoveVertical)
             {
-                if (moveDirection == "left")
+                if (moveDirection == "up")
                 {
                     for (int x = 0; x < 7; x++)
                     {
@@ -206,7 +204,6 @@ namespace SoftwareGridLock
                                         canMove = false; 
                                     }
                                 }
-
                                 if (x == 0)
                                 {
                                     canMove = false; //If it's on the top level it can't move up
@@ -215,7 +212,7 @@ namespace SoftwareGridLock
                         }
                     }
                 }
-                if (moveDirection == "right")
+                if (moveDirection == "down")
                 {
                     for (int x = 0; x < 7; x++)
                     {
@@ -232,7 +229,6 @@ namespace SoftwareGridLock
                                         canMove = false; //If the tile above each of the tiles in the car are not White or not the colour of the tile
                                     }
                                 }
-
                                 if (x == 6)
                                 {
                                     canMove = false;
@@ -244,33 +240,31 @@ namespace SoftwareGridLock
             }
             //I could experiment with having the for loop on the outside and the direction check on the inside? idk.
             if (canMove) {
-                if (moveDirection == "left" || moveDirection == "down") //again up and left. this difference is so that all the blocks show in the end
+                if (moveDirection == "up" || moveDirection == "left") //this difference is so that all the blocks show in the end
                 {
                     for (int i = 0; i < arrayX.Count; i++) //rather than there being all white and one block left behind
                     {
-                        if (moveDirection == "down") //Like if the board checking goes left - right up - down anything going the other way will get cut off
+                        if (moveDirection == "left") //Like if the board checking goes left - right up - down anything going the other way will get cut off
                         {
                             gameBoard[arrayX[i], arrayY[i]].BackColor = Color.White;
                             gameBoard[arrayX[i], arrayY[i] - 1].BackColor = pictureBoxSelectedColour.BackColor;
                         }
-                        
-                        if (moveDirection == "left")
+                        if (moveDirection == "up")
                         {
                             gameBoard[arrayX[i], arrayY[i]].BackColor = Color.White;
                             gameBoard[arrayX[i] - 1, arrayY[i]].BackColor = pictureBoxSelectedColour.BackColor;
                         }
                     }
                 }
-                if (moveDirection == "up" || moveDirection == "right") //right and down?
+                if (moveDirection == "right" || moveDirection == "down") 
                 {
                     for (int i = arrayX.Count - 1; i >= 0; i--) {
-                        if (moveDirection == "up")
+                        if (moveDirection == "right")
                         {
                             gameBoard[arrayX[i], arrayY[i]].BackColor = Color.White;
                             gameBoard[arrayX[i], arrayY[i] + 1].BackColor = pictureBoxSelectedColour.BackColor;
                         }
-
-                        if (moveDirection == "right")
+                        if (moveDirection == "down")
                         {
                             gameBoard[arrayX[i], arrayY[i]].BackColor = Color.White;
                             gameBoard[arrayX[i] + 1, arrayY[i]].BackColor = pictureBoxSelectedColour.BackColor;
@@ -279,7 +273,6 @@ namespace SoftwareGridLock
                 }
             }
         }
-
         private void button1_Click(object sender, EventArgs e) { selectCar(1); }
         private void button2_Click(object sender, EventArgs e) { selectCar(2); }
         private void button3_Click(object sender, EventArgs e) { selectCar(3); }
@@ -292,10 +285,10 @@ namespace SoftwareGridLock
         private void button10_Click(object sender, EventArgs e) { selectCar(10); }
         private void button11_Click(object sender, EventArgs e) { selectCar(11); }
 
-        private void btnUp_Click(object sender, EventArgs e) { moveCommand("left"); } //I actually don't know what's going on here
-        private void btnRight_Click(object sender, EventArgs e) { moveCommand("up"); } //Like genuinely it only works if I switch these around
-        private void btnDown_Click(object sender, EventArgs e) { moveCommand("right"); } //Uh I'm not even gonna bother it works and I'm not gonna touch
-        private void btnLeft_Click(object sender, EventArgs e) { moveCommand("down"); } //it until I need to.
+        private void btnUp_Click(object sender, EventArgs e) { moveCommand("up"); } 
+        private void btnRight_Click(object sender, EventArgs e) { moveCommand("right"); } 
+        private void btnDown_Click(object sender, EventArgs e) { moveCommand("down"); } 
+        private void btnLeft_Click(object sender, EventArgs e) { moveCommand("left"); } 
 
     }
 }
