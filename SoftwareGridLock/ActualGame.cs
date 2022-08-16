@@ -126,9 +126,9 @@ namespace SoftwareGridLock
                 }
             }
             bool canMove = true;
-            List<int> arrayX = new List<int>(); //This quite possibly may be the bodgiest piece of code i've ever written
+            List<int> arrayX = new List<int>(); //Two arrays that store the x and y positions of any blocks of the colour being moved while they're being checked
             int arrayXCounter = 0;
-            List<int> arrayY = new List<int>();
+            List<int> arrayY = new List<int>(); 
             int arrayYCounter = 0;
 
             if (canMoveVertical)
@@ -253,15 +253,16 @@ namespace SoftwareGridLock
             }
             //I could experiment with having the for loop on the outside and the direction check on the inside? idk.
             if (canMove) {
-                if (moveDirection == "up" || moveDirection == "left")
+                if (moveDirection == "left" || moveDirection == "down") //again up and left. this difference is so that all the blocks show in the end
                 {
-                    for (int i = 0; i < arrayX.Count; i++)
+                    for (int i = 0; i < arrayX.Count; i++) //rather than there being all white and one block left behind
                     {
-                        if (moveDirection == "up")
+                        if (moveDirection == "down") //Like if the board checking goes left - right up - down anything going the other way will get cut off
                         {
                             gameBoard[arrayX[i], arrayY[i]].BackColor = Color.White;
-                            gameBoard[arrayX[i], arrayY[i] + 1].BackColor = pictureBoxSelectedColour.BackColor;
+                            gameBoard[arrayX[i], arrayY[i] - 1].BackColor = pictureBoxSelectedColour.BackColor;
                         }
+                        
                         if (moveDirection == "left")
                         {
                             gameBoard[arrayX[i], arrayY[i]].BackColor = Color.White;
@@ -269,15 +270,15 @@ namespace SoftwareGridLock
                         }
                     }
                 }
-                if (moveDirection == "down" || moveDirection == "left") 
+                if (moveDirection == "up" || moveDirection == "right") //right and down?
                 {
-                    for (int i = arrayX.Count - 1; i >= 0; i--) { 
-                        if (moveDirection == "down")
+                    for (int i = arrayX.Count - 1; i >= 0; i--) {
+                        if (moveDirection == "up")
                         {
                             gameBoard[arrayX[i], arrayY[i]].BackColor = Color.White;
-                            gameBoard[arrayX[i], arrayY[i] - 1].BackColor = pictureBoxSelectedColour.BackColor;
+                            gameBoard[arrayX[i], arrayY[i] + 1].BackColor = pictureBoxSelectedColour.BackColor;
                         }
-                    
+
                         if (moveDirection == "right")
                         {
                             gameBoard[arrayX[i], arrayY[i]].BackColor = Color.White;
@@ -285,36 +286,6 @@ namespace SoftwareGridLock
                         }
                     }
                 }
-
-                /*for (int x = 1; x < 6; x++)
-                {
-                    for (int y = 1; y < 6; y++)
-                    {
-                        if (pictureBoxSelectedColour.BackColor == gameBoard[x, y].BackColor )
-                        {
-                            if (moveDirection == "up")
-                            {
-                                gameBoard[x, y].BackColor = Color.White;
-                                gameBoard[x, y + 1].BackColor = pictureBoxSelectedColour.BackColor;
-                            }
-                            if (moveDirection == "down")
-                            {
-                                gameBoard[x, y].BackColor = Color.White;
-                                gameBoard[x, y - 1].BackColor = pictureBoxSelectedColour.BackColor;
-                            }
-                            if (moveDirection == "left")
-                            {
-                                gameBoard[x, y].BackColor = Color.White;
-                                gameBoard[x - 1, y].BackColor = pictureBoxSelectedColour.BackColor;
-                            }
-                            if (moveDirection == "right")
-                            {
-                                gameBoard[x, y].BackColor = Color.White;
-                                gameBoard[x + 1, y].BackColor = pictureBoxSelectedColour.BackColor;
-                            }
-                        }
-                    }
-                }*/
             }
         }
 
@@ -329,14 +300,10 @@ namespace SoftwareGridLock
         private void button9_Click(object sender, EventArgs e) { selectCar(9); }
         private void button10_Click(object sender, EventArgs e) { selectCar(10); }
 
-        private void btnUp_Click(object sender, EventArgs e) { moveCommand("up"); }
-        private void btnRight_Click(object sender, EventArgs e) { moveCommand("right"); }
-        private void btnDown_Click(object sender, EventArgs e) { moveCommand("down"); }
-        private void btnLeft_Click(object sender, EventArgs e) { moveCommand("left"); }
-
-
-       
-
+        private void btnUp_Click(object sender, EventArgs e) { moveCommand("left"); } //I actually don't know what's going on here
+        private void btnRight_Click(object sender, EventArgs e) { moveCommand("up"); } //Like genuinely it only works if I switch these around
+        private void btnDown_Click(object sender, EventArgs e) { moveCommand("right"); } //Uh I'm not even gonna bother it works and I'm not gonna touch
+        private void btnLeft_Click(object sender, EventArgs e) { moveCommand("down"); } //it until I need to.
 
     }
 }
