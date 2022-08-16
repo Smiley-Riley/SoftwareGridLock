@@ -142,8 +142,21 @@ namespace SoftwareGridLock
             bool canMoveVertical = true;
             for (int i = 0; i < horizontalMove.Length; i++)
             {
-                if ()
+                if (horizontalMove[i] == selectedColour)
+                {
+                    canMoveHorizontal = false;
+                } 
+              
             }
+            for (int i = 0; i < verticalMove.Length; i++)
+            {
+                if (verticalMove[i] == selectedColour)
+                {
+                    canMoveVertical = false;
+                }
+            }
+
+
         }
     }
 }
