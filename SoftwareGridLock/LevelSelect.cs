@@ -47,5 +47,11 @@ namespace SoftwareGridLock
             actGame.Show();
             this.Hide();
         }
+
+        private void btnLvl6_Click(object sender, EventArgs e)
+        {
+            levelFile = @"board6NoClass.csv";
+            loadGame();
+        }
     }
 }

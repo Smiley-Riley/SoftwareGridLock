@@ -22,9 +22,10 @@ namespace SoftwareGridLock
 
         public static int numOfColours = colours.Length;
         PictureBox[,] gameBoard = new PictureBox[7, 7]; //Makes a 7x7 array that can store picture boxes
-        Button[] colourSelect = new Button[10]; //Same but with buttons
+        Button[] colourSelect = new Button[11]; //Same but with buttons
 
         private int time = 0;
+ 
 
         public ActualGame()
         {
@@ -47,7 +48,7 @@ namespace SoftwareGridLock
             }
 
             index = 1;
-            for (int i = 0; i < 10; i++) //Same as picture boxes but buttons
+            for (int i = 0; i < 11; i++) //Same as picture boxes but buttons
             {
                 colourSelect[i] = (Button)Controls.Find("button" + (index).ToString(), true)[0];
                 index++;
@@ -60,7 +61,7 @@ namespace SoftwareGridLock
                 startingColoursIndex++;
             }
 
-            for (int i = 9; i > numOfColours - 1; i--) //Hides all the excess white colour boxes
+            for (int i = 10; i > numOfColours - 1; i--) //Hides all the excess white colour boxes
             {
                 colourSelect[i].Hide();
             }
@@ -299,6 +300,7 @@ namespace SoftwareGridLock
         private void button8_Click(object sender, EventArgs e) { selectCar(8); }
         private void button9_Click(object sender, EventArgs e) { selectCar(9); }
         private void button10_Click(object sender, EventArgs e) { selectCar(10); }
+        private void button11_Click(object sender, EventArgs e) { selectCar(11); }
 
         private void btnUp_Click(object sender, EventArgs e) { moveCommand("left"); } //I actually don't know what's going on here
         private void btnRight_Click(object sender, EventArgs e) { moveCommand("up"); } //Like genuinely it only works if I switch these around
