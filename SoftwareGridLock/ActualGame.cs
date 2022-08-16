@@ -134,11 +134,11 @@ namespace SoftwareGridLock
             {
                 if (moveDirection == "right")
                 {
-                    for (int x = 0; x < 7; x++) //I'm also now aware that the way the 2D array works is that the y is the horizontal axis and the x is the 
+                    for (int x = 0; x < 7; x++) //I'm now aware that the way the 2D array works is that the y is the horizontal axis and the x is the 
                     {                           //vertical axis, but i'm too lazy to swap them arround so just accept it I guess
                         for (int y = 0; y < 7; y++)
                         {
-                            if(pictureBoxSelectedColour.BackColor == gameBoard[x,y].BackColor) //Checks if that tile is the one you're looking to move
+                            if(selectedColour == gameBoard[x,y].BackColor) //Checks if that tile is the one you're looking to move
                             {
                                 arrayX.Add(x);
                                 arrayY.Add(y);
@@ -165,7 +165,7 @@ namespace SoftwareGridLock
                     {
                         for (int y = 0; y < 7; y++)
                         {
-                            if (pictureBoxSelectedColour.BackColor == gameBoard[x, y].BackColor) //Checks if that tile is the one you're looking to move
+                            if (selectedColour == gameBoard[x, y].BackColor)
                             {
                                 arrayX.Add(x);
                                 arrayY.Add(y);
@@ -193,7 +193,7 @@ namespace SoftwareGridLock
                     {
                         for (int y = 0; y < 7; y++)
                         {
-                            if (pictureBoxSelectedColour.BackColor == gameBoard[x, y].BackColor) //Checks if that tile is the one you're looking to move
+                            if (selectedColour == gameBoard[x, y].BackColor) //Checks if that tile is the one you're looking to move
                             {
                                 arrayX.Add(x);
                                 arrayY.Add(y);
@@ -218,7 +218,7 @@ namespace SoftwareGridLock
                     {
                         for (int y = 0; y < 7; y++)
                         {
-                            if (pictureBoxSelectedColour.BackColor == gameBoard[x, y].BackColor) //Checks if that tile is the one you're looking to move
+                            if (selectedColour == gameBoard[x, y].BackColor) //Checks if that tile is the one you're looking to move
                             {
                                 arrayX.Add(x);
                                 arrayY.Add(y);
@@ -238,21 +238,21 @@ namespace SoftwareGridLock
                     }
                 }
             }
-            //I could experiment with having the for loop on the outside and the direction check on the inside? idk.
+
             if (canMove) {
-                if (moveDirection == "up" || moveDirection == "left") //this difference is so that all the blocks show in the end
+                if (moveDirection == "up" || moveDirection == "left") //This difference is so that all the blocks show in the end
                 {
                     for (int i = 0; i < arrayX.Count; i++) //rather than there being all white and one block left behind
                     {
                         if (moveDirection == "left") //Like if the board checking goes left - right up - down anything going the other way will get cut off
                         {
                             gameBoard[arrayX[i], arrayY[i]].BackColor = Color.White;
-                            gameBoard[arrayX[i], arrayY[i] - 1].BackColor = pictureBoxSelectedColour.BackColor;
+                            gameBoard[arrayX[i], arrayY[i] - 1].BackColor = selectedColour;
                         }
                         if (moveDirection == "up")
                         {
                             gameBoard[arrayX[i], arrayY[i]].BackColor = Color.White;
-                            gameBoard[arrayX[i] - 1, arrayY[i]].BackColor = pictureBoxSelectedColour.BackColor;
+                            gameBoard[arrayX[i] - 1, arrayY[i]].BackColor = selectedColour;
                         }
                     }
                 }
@@ -262,12 +262,12 @@ namespace SoftwareGridLock
                         if (moveDirection == "right")
                         {
                             gameBoard[arrayX[i], arrayY[i]].BackColor = Color.White;
-                            gameBoard[arrayX[i], arrayY[i] + 1].BackColor = pictureBoxSelectedColour.BackColor;
+                            gameBoard[arrayX[i], arrayY[i] + 1].BackColor = selectedColour;
                         }
                         if (moveDirection == "down")
                         {
                             gameBoard[arrayX[i], arrayY[i]].BackColor = Color.White;
-                            gameBoard[arrayX[i] + 1, arrayY[i]].BackColor = pictureBoxSelectedColour.BackColor;
+                            gameBoard[arrayX[i] + 1, arrayY[i]].BackColor = selectedColour;
                         }
                     }
                 }
@@ -288,7 +288,13 @@ namespace SoftwareGridLock
         private void btnUp_Click(object sender, EventArgs e) { moveCommand("up"); } 
         private void btnRight_Click(object sender, EventArgs e) { moveCommand("right"); } 
         private void btnDown_Click(object sender, EventArgs e) { moveCommand("down"); } 
-        private void btnLeft_Click(object sender, EventArgs e) { moveCommand("left"); } 
+        private void btnLeft_Click(object sender, EventArgs e) { moveCommand("left"); }
 
+        private void btnLevelSelect_Click(object sender, EventArgs e)
+        {
+            LevelSelect lvlSelect = new LevelSelect();
+            lvlSelect.Show();
+            this.Hide();
+        }
     }
 }

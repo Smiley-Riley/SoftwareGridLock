@@ -98,6 +98,7 @@
             this.btnRight = new System.Windows.Forms.Button();
             this.btnDown = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
+            this.btnLevelSelect = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -838,12 +839,24 @@
             this.button11.UseVisualStyleBackColor = false;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
+            // btnLevelSelect
+            // 
+            this.btnLevelSelect.BackColor = System.Drawing.Color.Linen;
+            this.btnLevelSelect.Location = new System.Drawing.Point(556, 28);
+            this.btnLevelSelect.Name = "btnLevelSelect";
+            this.btnLevelSelect.Size = new System.Drawing.Size(108, 23);
+            this.btnLevelSelect.TabIndex = 69;
+            this.btnLevelSelect.Text = "Back to level select";
+            this.btnLevelSelect.UseVisualStyleBackColor = false;
+            this.btnLevelSelect.Click += new System.EventHandler(this.btnLevelSelect_Click);
+            // 
             // ActualGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.ClientSize = new System.Drawing.Size(687, 612);
+            this.Controls.Add(this.btnLevelSelect);
             this.Controls.Add(this.button11);
             this.Controls.Add(this.btnDown);
             this.Controls.Add(this.btnRight);
@@ -992,5 +1005,6 @@
         private System.Windows.Forms.Button btnRight;
         private System.Windows.Forms.Button btnDown;
         private System.Windows.Forms.Button button11;
+        private System.Windows.Forms.Button btnLevelSelect;
     }
 }
