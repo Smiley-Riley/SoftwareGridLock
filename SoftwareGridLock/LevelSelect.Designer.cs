@@ -70,6 +70,7 @@
             this.btnLvl5.TabIndex = 18;
             this.btnLvl5.Text = "Level 5";
             this.btnLvl5.UseVisualStyleBackColor = true;
+            this.btnLvl5.Click += new System.EventHandler(this.btnLvl5_Click);
             // 
             // btnLvl4
             // 
@@ -80,6 +81,7 @@
             this.btnLvl4.TabIndex = 17;
             this.btnLvl4.Text = "Level 4";
             this.btnLvl4.UseVisualStyleBackColor = true;
+            this.btnLvl4.Click += new System.EventHandler(this.btnLvl4_Click);
             // 
             // btnLvl3
             // 

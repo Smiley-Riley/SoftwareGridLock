@@ -19,7 +19,7 @@ namespace SoftwareGridLock
             InitializeComponent();
         }
 
-        private void btnLvl3_Click(object sender, EventArgs e)
+        private void LevelSelect_Load(object sender, EventArgs e)
         {
 
         }
@@ -29,15 +29,30 @@ namespace SoftwareGridLock
             levelFile = @"board1NoClass.csv";
             loadGame();
         }
-
-        private void LevelSelect_Load(object sender, EventArgs e)
-        {
-            
-        }
-
         private void btnLvl2_Click(object sender, EventArgs e)
         {
             levelFile = @"board2NoClass.csv";
+            loadGame();
+        }
+        private void btnLvl3_Click(object sender, EventArgs e)
+        {
+            levelFile = @"board3NoClass.csv";
+            loadGame();
+        }
+
+        private void btnLvl4_Click(object sender, EventArgs e)
+        {
+            levelFile = @"board4NoClass.csv";
+            loadGame();
+        }
+        private void btnLvl5_Click(object sender, EventArgs e)
+        {
+            levelFile = @"board5NoClass.csv";
+            loadGame();
+        }
+        private void btnLvl6_Click(object sender, EventArgs e)
+        {
+            levelFile = @"board6NoClass.csv";
             loadGame();
         }
 
@@ -48,10 +63,9 @@ namespace SoftwareGridLock
             this.Hide();
         }
 
-        private void btnLvl6_Click(object sender, EventArgs e)
-        {
-            levelFile = @"board6NoClass.csv";
-            loadGame();
-        }
+       
+
+       
+
     }
 }

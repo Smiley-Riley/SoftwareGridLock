@@ -128,9 +128,7 @@ namespace SoftwareGridLock
             }
             bool canMove = true;
             List<int> arrayX = new List<int>(); //Two arrays that store the x and y positions of any blocks of the colour being moved while they're being checked
-            int arrayXCounter = 0;
             List<int> arrayY = new List<int>(); 
-            int arrayYCounter = 0;
 
             if (canMoveVertical)
             {
@@ -143,9 +141,7 @@ namespace SoftwareGridLock
                             if(pictureBoxSelectedColour.BackColor == gameBoard[x,y].BackColor) //Checks if that tile is the one you're looking to move
                             {
                                 arrayX.Add(x);
-                                arrayXCounter++;
                                 arrayY.Add(y);
-                                arrayYCounter++;
                                 if (y < 6) //if y = 6, the y + 1 is out of the index
                                 {
                                     if (gameBoard[x, y + 1].BackColor != gameBoard[x,y].BackColor && gameBoard[x, y + 1].BackColor != Color.White)
@@ -173,9 +169,7 @@ namespace SoftwareGridLock
                             if (pictureBoxSelectedColour.BackColor == gameBoard[x, y].BackColor) //Checks if that tile is the one you're looking to move
                             {
                                 arrayX.Add(x);
-                                arrayXCounter++;
                                 arrayY.Add(y);
-                                arrayYCounter++;
                                 if (y > 0) 
                                 {
                                     if (gameBoard[x, y - 1].BackColor != gameBoard[x, y].BackColor && gameBoard[x, y - 1].BackColor != Color.White)
@@ -204,9 +198,7 @@ namespace SoftwareGridLock
                             if (pictureBoxSelectedColour.BackColor == gameBoard[x, y].BackColor) //Checks if that tile is the one you're looking to move
                             {
                                 arrayX.Add(x);
-                                arrayXCounter++;
                                 arrayY.Add(y);
-                                arrayYCounter++;
                                 if (x > 0) 
                                 {
                                     if (gameBoard[x - 1, y].BackColor != gameBoard[x, y].BackColor && gameBoard[x - 1, y].BackColor != Color.White)
@@ -232,9 +224,7 @@ namespace SoftwareGridLock
                             if (pictureBoxSelectedColour.BackColor == gameBoard[x, y].BackColor) //Checks if that tile is the one you're looking to move
                             {
                                 arrayX.Add(x);
-                                arrayXCounter++;
                                 arrayY.Add(y);
-                                arrayYCounter++;
                                 if (x < 6)
                                 {
                                     if (gameBoard[x + 1, y].BackColor != gameBoard[x, y].BackColor && gameBoard[x + 1, y].BackColor != Color.White)
@@ -245,7 +235,7 @@ namespace SoftwareGridLock
 
                                 if (x == 6)
                                 {
-                                    canMove = false; //If it's on the top level it can't move up
+                                    canMove = false;
                                 }
                             }
                         }
