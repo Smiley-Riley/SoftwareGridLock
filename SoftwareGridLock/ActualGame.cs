@@ -16,7 +16,7 @@ namespace SoftwareGridLock
         public static int numOfColours = readFileLine(LevelSelect.levelFile, 2).Split(',').Length;
         PictureBox[,] gameBoard = new PictureBox[7, 7]; //Makes a 7x7 array that can store picture boxes
         Button[] colourSelect = new Button[10]; //Same but with buttons
-
+        ee
         Color[] boardLayout = readFileLine(LevelSelect.levelFile, 2).Split(',').Select(name => Color.FromName(name)).ToArray();
         //Color[] colours = readFileLine(LevelSelect.levelFile, 2).Split(',').Select(name => Color.FromName(name)).ToArray();
         //Color[] colours = readFileLine(LevelSelect.levelFile, 2).Split(',').Select(name => Color.FromName(name)).ToArray();
