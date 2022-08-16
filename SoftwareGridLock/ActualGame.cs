@@ -13,17 +13,19 @@ namespace SoftwareGridLock
 {
     public partial class ActualGame : Form
     {
-        public static int numOfColours = readFileLine(LevelSelect.levelFile, 2).Split(',').Length;
+        
+        
+        public static Color[] startingConfig = readFileLine(LevelSelect.levelFile, 2).Split(',').Select(name => Color.FromName(name)).ToArray();
+        public static Color[] colours = readFileLine(LevelSelect.levelFile, 2).Split(',').Select(name => Color.FromName(name)).ToArray();
+        public static Color[] horizontalMove = readFileLine(LevelSelect.levelFile, 2).Split(',').Select(name => Color.FromName(name)).ToArray();
+        public static Color[] verticalMove = readFileLine(LevelSelect.levelFile, 2).Split(',').Select(name => Color.FromName(name)).ToArray();
+
+        public static int numOfColours = colours.Length;
         PictureBox[,] gameBoard = new PictureBox[7, 7]; //Makes a 7x7 array that can store picture boxes
         Button[] colourSelect = new Button[10]; //Same but with buttons
-        ee
-        Color[] boardLayout = readFileLine(LevelSelect.levelFile, 2).Split(',').Select(name => Color.FromName(name)).ToArray();
-        //Color[] colours = readFileLine(LevelSelect.levelFile, 2).Split(',').Select(name => Color.FromName(name)).ToArray();
-        //Color[] colours = readFileLine(LevelSelect.levelFile, 2).Split(',').Select(name => Color.FromName(name)).ToArray();
-        //Color[] colours = readFileLine(LevelSelect.levelFile, 2).Split(',').Select(name => Color.FromName(name)).ToArray();
-        
 
         private int time = 0;
+
         public ActualGame()
         {
             InitializeComponent();
@@ -51,11 +53,10 @@ namespace SoftwareGridLock
                 index++;
             }
 
-            string[] colours = readFileLine(LevelSelect.levelFile, 2).Split(',');
             int startingColoursIndex = 0;
             for (int i = 0; i < numOfColours; i++)  //Colours all of the buttons that let you select the move colour
             {
-                colourSelect[i].BackColor = boardLayout[startingColoursIndex];/*Color.FromName(colours[startingColoursIndex]);*/
+                colourSelect[i].BackColor = colours[startingColoursIndex];/*Color.FromName(colours[startingColoursIndex]);*/
                 startingColoursIndex++;
             }
 
@@ -64,14 +65,13 @@ namespace SoftwareGridLock
                 colourSelect[i].Hide();
             }
             
-
-            string[] startingConfig = readFileLine(LevelSelect.levelFile, 1).Split(',');
+  
             int startingConfigIndex = 0;
             for (int i = 0; i < 7; i++)
             {
                 for (int j = 0; j < 7; j++) //Sets the board up with whatever is in the saved csv file
                 {
-                    gameBoard[i, j].BackColor = Color.FromName(startingConfig[startingConfigIndex]);
+                    gameBoard[i, j].BackColor = startingConfig[startingConfigIndex];
                     startingConfigIndex++;
                 }
             }
