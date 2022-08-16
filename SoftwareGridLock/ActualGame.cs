@@ -13,7 +13,7 @@ namespace SoftwareGridLock
 {
     public partial class ActualGame : Form
     {
-
+        //LevelSelect LevelSelect = new LevelSelect();
         public static Color[] startingConfig = readFileLine(LevelSelect.levelFile, 1).Split(',').Select(name => Color.FromName(name)).ToArray();
         public static Color[] colours = readFileLine(LevelSelect.levelFile, 2).Split(',').Select(name => Color.FromName(name)).ToArray();
         public static Color[] horizontalMove = readFileLine(LevelSelect.levelFile, 3).Split(',').Select(name => Color.FromName(name)).ToArray();
@@ -35,6 +35,7 @@ namespace SoftwareGridLock
 
         private void ActualGame_Load(object sender, EventArgs e)
         {
+            MessageBox.Show(LevelSelect.levelFile); //The file path changes but the board doesn't update?
             Timer.Start();
             int index = 1;
             for (int i = 0; i < 7; i++) //Adds picture boxes to array by searching through their names (pictureBox1, pictureBox2, etc)
@@ -294,7 +295,7 @@ namespace SoftwareGridLock
         {
             LevelSelect lvlSelect = new LevelSelect();
             lvlSelect.Show();
-            this.Hide();
+            this.Close();
         }
     }
 }

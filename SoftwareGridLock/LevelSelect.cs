@@ -60,7 +60,7 @@ namespace SoftwareGridLock
         {
             ActualGame actGame = new ActualGame();
             actGame.Show();
-            this.Hide();
+            this.Close();
         }
 
        
