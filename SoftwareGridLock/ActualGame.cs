@@ -15,10 +15,10 @@ namespace SoftwareGridLock
     {
         
         
-        public static Color[] startingConfig = readFileLine(LevelSelect.levelFile, 2).Split(',').Select(name => Color.FromName(name)).ToArray();
+        public static Color[] startingConfig = readFileLine(LevelSelect.levelFile, 1).Split(',').Select(name => Color.FromName(name)).ToArray();
         public static Color[] colours = readFileLine(LevelSelect.levelFile, 2).Split(',').Select(name => Color.FromName(name)).ToArray();
-        public static Color[] horizontalMove = readFileLine(LevelSelect.levelFile, 2).Split(',').Select(name => Color.FromName(name)).ToArray();
-        public static Color[] verticalMove = readFileLine(LevelSelect.levelFile, 2).Split(',').Select(name => Color.FromName(name)).ToArray();
+        public static Color[] horizontalMove = readFileLine(LevelSelect.levelFile, 3).Split(',').Select(name => Color.FromName(name)).ToArray();
+        public static Color[] verticalMove = readFileLine(LevelSelect.levelFile, 4).Split(',').Select(name => Color.FromName(name)).ToArray();
 
         public static int numOfColours = colours.Length;
         PictureBox[,] gameBoard = new PictureBox[7, 7]; //Makes a 7x7 array that can store picture boxes
@@ -101,7 +101,7 @@ namespace SoftwareGridLock
             MessageBox.Show(temp);
             pictureBoxSelectedColour.BackColor = Color.FromName(temp);*/
             //pictureBoxSelectedColour.BackColor = Color.FromName(colours[button - 1]);
-            Color[] colours = readFileLine(LevelSelect.levelFile, 2).Split(',').Select(name => Color.FromName(name)).ToArray();
+          //Color[] colours = readFileLine(LevelSelect.levelFile, 2).Split(',').Select(name => Color.FromName(name)).ToArray();
             pictureBoxSelectedColour.BackColor = colours[button - 1];
         } 
         private void button1_Click(object sender, EventArgs e) { selectCar(1); }
@@ -114,5 +114,36 @@ namespace SoftwareGridLock
         private void button8_Click(object sender, EventArgs e) { selectCar(8); }
         private void button9_Click(object sender, EventArgs e) { selectCar(9); }
         private void button10_Click(object sender, EventArgs e) { selectCar(10); }
+
+        private void btnUp_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void btnRight_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnDown_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnLeft_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void moveCommand()
+        {
+            Color selectedColour = pictureBoxSelectedColour.BackColor;
+            bool canMoveHorizontal = true;
+            bool canMoveVertical = true;
+            for (int i = 0; i < horizontalMove.Length; i++)
+            {
+                if ()
+            }
+        }
     }
 }
