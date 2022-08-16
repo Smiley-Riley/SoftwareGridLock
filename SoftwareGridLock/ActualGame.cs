@@ -101,9 +101,172 @@ namespace SoftwareGridLock
             MessageBox.Show(temp);
             pictureBoxSelectedColour.BackColor = Color.FromName(temp);*/
             //pictureBoxSelectedColour.BackColor = Color.FromName(colours[button - 1]);
-          //Color[] colours = readFileLine(LevelSelect.levelFile, 2).Split(',').Select(name => Color.FromName(name)).ToArray();
+            //Color[] colours = readFileLine(LevelSelect.levelFile, 2).Split(',').Select(name => Color.FromName(name)).ToArray();
             pictureBoxSelectedColour.BackColor = colours[button - 1];
-        } 
+        }
+
+        private void moveCommand(string moveDirection)
+        {
+            Color selectedColour = pictureBoxSelectedColour.BackColor;
+            bool canMoveHorizontal = true;
+            bool canMoveVertical = true;
+            for (int i = 0; i < horizontalMove.Length; i++)
+            {
+                if (horizontalMove[i] == selectedColour)
+                {
+                    canMoveHorizontal = false;
+                }
+
+            }
+            for (int i = 0; i < verticalMove.Length; i++)
+            {
+                if (verticalMove[i] == selectedColour)
+                {
+                    canMoveVertical = false;
+                }
+            }
+            bool canMove = true;
+            int[] arrayX = { 0, 0, 0, 0 }; //This quite possibly may be the bogiest piece of code i've ever written
+            int[] arrayY = { 0, 0, 0, 0 };
+
+            if (canMoveVertical)
+            {
+                if (moveDirection == "up")
+                {
+                    for (int x = 0; x < 7; x++)
+                    {
+                        for (int y = 0; y < 7; y++)
+                        {
+                            if(pictureBoxSelectedColour.BackColor == gameBoard[x,y].BackColor) //Checks if that tile is the one you're looking to move
+                            { 
+                                if (y < 6) //if y = 6, the y + 1 is out of the index
+                                {
+                                    if (gameBoard[x, y + 1].BackColor != gameBoard[x,y].BackColor && gameBoard[x, y + 1].BackColor != Color.White)
+                                    {
+                                        canMove = false; //If the tile above each of the tiles in the car are not White or not the colour of the tile
+                                    }
+                                }
+
+                                if (y == 6)
+                                {
+                                    canMove = false; //If it's on the top level it can't move up
+                                }
+                            }
+                        }
+                    }
+
+
+                }
+                if (moveDirection == "down")
+                {
+                    for (int x = 0; x < 7; x++)
+                    {
+                        for (int y = 0; y < 7; y++)
+                        {
+                            if (pictureBoxSelectedColour.BackColor == gameBoard[x, y].BackColor) //Checks if that tile is the one you're looking to move
+                            {
+                                if (y > 0) 
+                                {
+                                    if (gameBoard[x, y - 1].BackColor != gameBoard[x, y].BackColor && gameBoard[x, y - 1].BackColor != Color.White)
+                                    {
+                                        canMove = false; 
+                                    }
+                                }
+
+                                if (y == 0)
+                                {
+                                    canMove = false;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            if (canMoveHorizontal)
+            {
+                if (moveDirection == "left")
+                {
+                    for (int x = 0; x < 7; x++)
+                    {
+                        for (int y = 0; y < 7; y++)
+                        {
+                            if (pictureBoxSelectedColour.BackColor == gameBoard[x, y].BackColor) //Checks if that tile is the one you're looking to move
+                            {
+                                if (x > 0) 
+                                {
+                                    if (gameBoard[x - 1, y].BackColor != gameBoard[x, y].BackColor && gameBoard[x - 1, y].BackColor != Color.White)
+                                    {
+                                        canMove = false; 
+                                    }
+                                }
+
+                                if (x == 0)
+                                {
+                                    canMove = false; //If it's on the top level it can't move up
+                                }
+                            }
+                        }
+                    }
+                }
+                if (moveDirection == "right")
+                {
+                    for (int x = 0; x < 7; x++)
+                    {
+                        for (int y = 0; y < 7; y++)
+                        {
+                            if (pictureBoxSelectedColour.BackColor == gameBoard[x, y].BackColor) //Checks if that tile is the one you're looking to move
+                            {
+                                if (x < 6)
+                                {
+                                    if (gameBoard[x + 1, y].BackColor != gameBoard[x, y].BackColor && gameBoard[x + 1, y].BackColor != Color.White)
+                                    {
+                                        canMove = false; //If the tile above each of the tiles in the car are not White or not the colour of the tile
+                                    }
+                                }
+
+                                if (x == 6)
+                                {
+                                    canMove = false; //If it's on the top level it can't move up
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            //I could experiment with having the for loop on the outside and the direction check on the inside? idk.
+            if (canMove) { 
+                for (int x = 1; x < 6; x++)
+                {
+                    for (int y = 1; y < 6; y++)
+                    {
+                        if (pictureBoxSelectedColour.BackColor == gameBoard[x, y].BackColor )
+                        {
+                            if (moveDirection == "up")
+                            {
+                                gameBoard[x, y].BackColor = Color.White;
+                                gameBoard[x, y + 1].BackColor = pictureBoxSelectedColour.BackColor;
+                            }
+                            if (moveDirection == "down")
+                            {
+                                gameBoard[x, y].BackColor = Color.White;
+                                gameBoard[x, y - 1].BackColor = pictureBoxSelectedColour.BackColor;
+                            }
+                            if (moveDirection == "left")
+                            {
+                                gameBoard[x, y].BackColor = Color.White;
+                                gameBoard[x - 1, y].BackColor = pictureBoxSelectedColour.BackColor;
+                            }
+                            if (moveDirection == "right")
+                            {
+                                gameBoard[x, y].BackColor = Color.White;
+                                gameBoard[x + 1, y].BackColor = pictureBoxSelectedColour.BackColor;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         private void button1_Click(object sender, EventArgs e) { selectCar(1); }
         private void button2_Click(object sender, EventArgs e) { selectCar(2); }
         private void button3_Click(object sender, EventArgs e) { selectCar(3); }
@@ -115,48 +278,14 @@ namespace SoftwareGridLock
         private void button9_Click(object sender, EventArgs e) { selectCar(9); }
         private void button10_Click(object sender, EventArgs e) { selectCar(10); }
 
-        private void btnUp_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void btnRight_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnDown_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnLeft_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void moveCommand()
-        {
-            Color selectedColour = pictureBoxSelectedColour.BackColor;
-            bool canMoveHorizontal = true;
-            bool canMoveVertical = true;
-            for (int i = 0; i < horizontalMove.Length; i++)
-            {
-                if (horizontalMove[i] == selectedColour)
-                {
-                    canMoveHorizontal = false;
-                } 
-              
-            }
-            for (int i = 0; i < verticalMove.Length; i++)
-            {
-                if (verticalMove[i] == selectedColour)
-                {
-                    canMoveVertical = false;
-                }
-            }
+        private void btnUp_Click(object sender, EventArgs e) { moveCommand("up"); }
+        private void btnRight_Click(object sender, EventArgs e) { moveCommand("right"); }
+        private void btnDown_Click(object sender, EventArgs e) { moveCommand("down"); }
+        private void btnLeft_Click(object sender, EventArgs e) { moveCommand("left"); }
 
 
-        }
+       
+
+
     }
 }
