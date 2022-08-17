@@ -14,17 +14,21 @@ namespace SoftwareGridLock
     public partial class ActualGame : Form
     {
         //LevelSelect LevelSelect = new LevelSelect();
-        public static Color[] startingConfig = readFileLine(LevelSelect.levelFile, 1).Split(',').Select(name => Color.FromName(name)).ToArray();
+        public Color[] startingConfig = readFileLine(LevelSelect.levelFile, 1).Split(',').Select(name => Color.FromName(name)).ToArray();
         public static Color[] colours = readFileLine(LevelSelect.levelFile, 2).Split(',').Select(name => Color.FromName(name)).ToArray();
-        public static Color[] horizontalMove = readFileLine(LevelSelect.levelFile, 3).Split(',').Select(name => Color.FromName(name)).ToArray();
-        public static Color[] verticalMove = readFileLine(LevelSelect.levelFile, 4).Split(',').Select(name => Color.FromName(name)).ToArray();
+        public Color[] horizontalMove = readFileLine(LevelSelect.levelFile, 3).Split(',').Select(name => Color.FromName(name)).ToArray();
+        public Color[] verticalMove = readFileLine(LevelSelect.levelFile, 4).Split(',').Select(name => Color.FromName(name)).ToArray(); //So close to lining up perfectly :(
+        public int[] endingPos = readFileLine(LevelSelect.levelFile, 5).Split(',').Select(name => Convert.ToInt32(name)).ToArray();
 
-        public static int numOfColours = colours.Length;
+        List<int> endPosArrY = new List<int>();
+        List<int> endPosArrX = new List<int>();
+
+        public int numOfColours = colours.Length;
+
         PictureBox[,] gameBoard = new PictureBox[7, 7]; //Makes a 7x7 array that can store picture boxes
         Button[] colourSelect = new Button[11]; //Same but with buttons
 
         private int time = 0;
- 
 
         public ActualGame()
         {
@@ -35,6 +39,15 @@ namespace SoftwareGridLock
 
         private void ActualGame_Load(object sender, EventArgs e)
         {
+            for (int i = 0; i < endingPos.Length; i += 2)
+            {
+                endPosArrY.Add(endingPos[i]);
+                endPosArrX.Add(endingPos[i + 1]);
+            }
+            
+
+
+
             MessageBox.Show(LevelSelect.levelFile); //The file path changes but the board doesn't update?
             Timer.Start();
             int index = 1;
@@ -273,6 +286,12 @@ namespace SoftwareGridLock
                     }
                 }
             }
+            for (int i = 0; i < endingPos.Length; i += 2)
+            {
+
+            }
+
+
         }
         private void button1_Click(object sender, EventArgs e) { selectCar(1); }
         private void button2_Click(object sender, EventArgs e) { selectCar(2); }
