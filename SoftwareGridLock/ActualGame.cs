@@ -287,12 +287,13 @@ namespace SoftwareGridLock
                 lblWinText.Show();
                 Timer.Stop();
                 DateTime end = DateTime.Now;
-                TimeSpan ts = end - start;
+                TimeSpan ts = end - start; //Compares the exact time of the start of the program and the win
                 string str = Convert.ToString(ts.TotalMilliseconds);
-                str = str.Substring(0, str.Length - 5);
+                str = str.Substring(0, str.Length - 5); //ts.TotalMilliseconds gives the milliseconds as well as four decimal places, this removes that
+                //str[] = str.Split('.');
                 int time = Convert.ToInt32(str);
                 int numOfMinutes = 0;
-                while (time > 60000)
+                while (time > 60000) //Subtracts minutes at a time until there is less than a minute of time left
                 {
                     time -= 60000;
                     numOfMinutes++;
