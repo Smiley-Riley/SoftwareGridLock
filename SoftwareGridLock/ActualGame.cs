@@ -28,8 +28,16 @@ namespace SoftwareGridLock
 
         int time = 0;
         DateTime start = DateTime.Now;
-        
-        
+
+        private static string readFileLine(string path, int line)
+        {
+            StreamReader reader = new StreamReader(path); //Opens the file 
+            for (int i = 0; i < line - 1; i++)
+            {
+                reader.ReadLine(); //skips lines until the one you want
+            }
+            return reader.ReadLine();
+        }
         public ActualGame() { InitializeComponent(); }
 
         private void ActualGame_Load(object sender, EventArgs e)
@@ -89,16 +97,6 @@ namespace SoftwareGridLock
                     startingConfigIndex++;
                 }
             }
-        }
-
-        private static string readFileLine(string path, int line)
-        {
-            StreamReader reader = new StreamReader(path); //Opens the file 
-            for (int i = 0; i < line - 1; i++)
-            {
-                string garbage = reader.ReadLine(); //This feels like bad coding but it essentially skips lines until the one you want
-            }
-            return reader.ReadLine();
         }
 
         private void Timer_Tick(object sender, EventArgs e)
@@ -288,10 +286,10 @@ namespace SoftwareGridLock
                 Timer.Stop();
                 DateTime end = DateTime.Now;
                 TimeSpan ts = end - start; //Compares the exact time of the start of the program and the win
-                string str = Convert.ToString(ts.TotalMilliseconds);
-                str = str.Substring(0, str.Length - 5); //ts.TotalMilliseconds gives the milliseconds as well as four decimal places, this removes that
-                //str[] = str.Split('.');
-                int time = Convert.ToInt32(str);
+                /*string str = Convert.ToString(ts.TotalMilliseconds);
+                str = str.Split('.')[0]; //This is what I first wrote and felt really smart about but also Convert.ToInt32() is just the better option
+                int time = Convert.ToInt32(str);*/
+                int time = Convert.ToInt32(ts.TotalMilliseconds);
                 int numOfMinutes = 0;
                 while (time > 60000) //Subtracts minutes at a time until there is less than a minute of time left
                 {
@@ -299,7 +297,7 @@ namespace SoftwareGridLock
                     numOfMinutes++;
                 }
                 int numOfSeconds = 0;
-                while (time > 1000)
+                while (time > 1000) //Subtracts seconds until less than a second
                 {
                     time -= 1000;
                     numOfSeconds++;
