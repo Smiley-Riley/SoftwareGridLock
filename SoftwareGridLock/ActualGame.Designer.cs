@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ActualGame));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
@@ -99,6 +100,17 @@
             this.btnDown = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
             this.btnLevelSelect = new System.Windows.Forms.Button();
+            this.lblWinText = new System.Windows.Forms.Label();
+            this.pictureBox50 = new System.Windows.Forms.PictureBox();
+            this.finishLine1 = new System.Windows.Forms.PictureBox();
+            this.finishLine2 = new System.Windows.Forms.PictureBox();
+            this.finishLine3 = new System.Windows.Forms.PictureBox();
+            this.finishLine4 = new System.Windows.Forms.PictureBox();
+            this.finishLine5 = new System.Windows.Forms.PictureBox();
+            this.finishLine6 = new System.Windows.Forms.PictureBox();
+            this.finishLine7 = new System.Windows.Forms.PictureBox();
+            this.finishLine8 = new System.Windows.Forms.PictureBox();
+            this.btnResetLvl = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -150,6 +162,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox49)).BeginInit();
             this.grpGameBoard.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSelectedColour)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox50)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.finishLine1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.finishLine2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.finishLine3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.finishLine4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.finishLine5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.finishLine6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.finishLine7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.finishLine8)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -787,7 +808,7 @@
             // btnUp
             // 
             this.btnUp.Font = new System.Drawing.Font("Calibri", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUp.Location = new System.Drawing.Point(556, 178);
+            this.btnUp.Location = new System.Drawing.Point(573, 178);
             this.btnUp.Name = "btnUp";
             this.btnUp.Size = new System.Drawing.Size(50, 50);
             this.btnUp.TabIndex = 64;
@@ -798,7 +819,7 @@
             // btnLeft
             // 
             this.btnLeft.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLeft.Location = new System.Drawing.Point(500, 234);
+            this.btnLeft.Location = new System.Drawing.Point(517, 234);
             this.btnLeft.Name = "btnLeft";
             this.btnLeft.Size = new System.Drawing.Size(50, 50);
             this.btnLeft.TabIndex = 65;
@@ -809,7 +830,7 @@
             // btnRight
             // 
             this.btnRight.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRight.Location = new System.Drawing.Point(614, 234);
+            this.btnRight.Location = new System.Drawing.Point(631, 234);
             this.btnRight.Name = "btnRight";
             this.btnRight.Size = new System.Drawing.Size(50, 50);
             this.btnRight.TabIndex = 66;
@@ -820,7 +841,7 @@
             // btnDown
             // 
             this.btnDown.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDown.Location = new System.Drawing.Point(556, 290);
+            this.btnDown.Location = new System.Drawing.Point(573, 290);
             this.btnDown.Name = "btnDown";
             this.btnDown.Size = new System.Drawing.Size(50, 50);
             this.btnDown.TabIndex = 67;
@@ -842,7 +863,7 @@
             // btnLevelSelect
             // 
             this.btnLevelSelect.BackColor = System.Drawing.Color.Linen;
-            this.btnLevelSelect.Location = new System.Drawing.Point(556, 28);
+            this.btnLevelSelect.Location = new System.Drawing.Point(592, 12);
             this.btnLevelSelect.Name = "btnLevelSelect";
             this.btnLevelSelect.Size = new System.Drawing.Size(108, 23);
             this.btnLevelSelect.TabIndex = 69;
@@ -850,12 +871,127 @@
             this.btnLevelSelect.UseVisualStyleBackColor = false;
             this.btnLevelSelect.Click += new System.EventHandler(this.btnLevelSelect_Click);
             // 
+            // lblWinText
+            // 
+            this.lblWinText.AutoSize = true;
+            this.lblWinText.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblWinText.Location = new System.Drawing.Point(516, 122);
+            this.lblWinText.Name = "lblWinText";
+            this.lblWinText.Size = new System.Drawing.Size(176, 37);
+            this.lblWinText.TabIndex = 70;
+            this.lblWinText.Text = "YOU WIN!";
+            // 
+            // pictureBox50
+            // 
+            this.pictureBox50.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox50.Image")));
+            this.pictureBox50.Location = new System.Drawing.Point(612, 499);
+            this.pictureBox50.Name = "pictureBox50";
+            this.pictureBox50.Size = new System.Drawing.Size(74, 77);
+            this.pictureBox50.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox50.TabIndex = 71;
+            this.pictureBox50.TabStop = false;
+            // 
+            // finishLine1
+            // 
+            this.finishLine1.Image = ((System.Drawing.Image)(resources.GetObject("finishLine1.Image")));
+            this.finishLine1.Location = new System.Drawing.Point(433, 40);
+            this.finishLine1.Name = "finishLine1";
+            this.finishLine1.Size = new System.Drawing.Size(61, 47);
+            this.finishLine1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.finishLine1.TabIndex = 72;
+            this.finishLine1.TabStop = false;
+            // 
+            // finishLine2
+            // 
+            this.finishLine2.Image = ((System.Drawing.Image)(resources.GetObject("finishLine2.Image")));
+            this.finishLine2.Location = new System.Drawing.Point(433, 93);
+            this.finishLine2.Name = "finishLine2";
+            this.finishLine2.Size = new System.Drawing.Size(61, 47);
+            this.finishLine2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.finishLine2.TabIndex = 73;
+            this.finishLine2.TabStop = false;
+            // 
+            // finishLine3
+            // 
+            this.finishLine3.Image = ((System.Drawing.Image)(resources.GetObject("finishLine3.Image")));
+            this.finishLine3.Location = new System.Drawing.Point(433, 146);
+            this.finishLine3.Name = "finishLine3";
+            this.finishLine3.Size = new System.Drawing.Size(61, 47);
+            this.finishLine3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.finishLine3.TabIndex = 74;
+            this.finishLine3.TabStop = false;
+            // 
+            // finishLine4
+            // 
+            this.finishLine4.Image = ((System.Drawing.Image)(resources.GetObject("finishLine4.Image")));
+            this.finishLine4.Location = new System.Drawing.Point(433, 199);
+            this.finishLine4.Name = "finishLine4";
+            this.finishLine4.Size = new System.Drawing.Size(61, 47);
+            this.finishLine4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.finishLine4.TabIndex = 75;
+            this.finishLine4.TabStop = false;
+            // 
+            // finishLine5
+            // 
+            this.finishLine5.Image = ((System.Drawing.Image)(resources.GetObject("finishLine5.Image")));
+            this.finishLine5.Location = new System.Drawing.Point(433, 261);
+            this.finishLine5.Name = "finishLine5";
+            this.finishLine5.Size = new System.Drawing.Size(61, 47);
+            this.finishLine5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.finishLine5.TabIndex = 76;
+            this.finishLine5.TabStop = false;
+            // 
+            // finishLine6
+            // 
+            this.finishLine6.Image = ((System.Drawing.Image)(resources.GetObject("finishLine6.Image")));
+            this.finishLine6.Location = new System.Drawing.Point(433, 314);
+            this.finishLine6.Name = "finishLine6";
+            this.finishLine6.Size = new System.Drawing.Size(61, 47);
+            this.finishLine6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.finishLine6.TabIndex = 77;
+            this.finishLine6.TabStop = false;
+            // 
+            // finishLine7
+            // 
+            this.finishLine7.Image = ((System.Drawing.Image)(resources.GetObject("finishLine7.Image")));
+            this.finishLine7.Location = new System.Drawing.Point(433, 367);
+            this.finishLine7.Name = "finishLine7";
+            this.finishLine7.Size = new System.Drawing.Size(61, 47);
+            this.finishLine7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.finishLine7.TabIndex = 78;
+            this.finishLine7.TabStop = false;
+            // 
+            // finishLine8
+            // 
+            this.finishLine8.Image = ((System.Drawing.Image)(resources.GetObject("finishLine8.Image")));
+            this.finishLine8.Location = new System.Drawing.Point(433, 420);
+            this.finishLine8.Name = "finishLine8";
+            this.finishLine8.Size = new System.Drawing.Size(61, 47);
+            this.finishLine8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.finishLine8.TabIndex = 78;
+            this.finishLine8.TabStop = false;
+            // 
+            // btnResetLvl
+            // 
+            this.btnResetLvl.BackColor = System.Drawing.Color.Linen;
+            this.btnResetLvl.Location = new System.Drawing.Point(592, 40);
+            this.btnResetLvl.Name = "btnResetLvl";
+            this.btnResetLvl.Size = new System.Drawing.Size(108, 20);
+            this.btnResetLvl.TabIndex = 79;
+            this.btnResetLvl.Text = "Reset this level";
+            this.btnResetLvl.UseVisualStyleBackColor = false;
+            this.btnResetLvl.Click += new System.EventHandler(this.btnResetLvl_Click);
+            // 
             // ActualGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gainsboro;
-            this.ClientSize = new System.Drawing.Size(687, 612);
+            this.ClientSize = new System.Drawing.Size(712, 612);
+            this.Controls.Add(this.btnResetLvl);
+            this.Controls.Add(this.pictureBoxSelectedColour);
+            this.Controls.Add(this.pictureBox50);
+            this.Controls.Add(this.lblWinText);
             this.Controls.Add(this.btnLevelSelect);
             this.Controls.Add(this.button11);
             this.Controls.Add(this.btnDown);
@@ -865,7 +1001,6 @@
             this.Controls.Add(this.button10);
             this.Controls.Add(this.button9);
             this.Controls.Add(this.button8);
-            this.Controls.Add(this.pictureBoxSelectedColour);
             this.Controls.Add(this.grpGameBoard);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.button6);
@@ -875,8 +1010,16 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.lblTimer);
+            this.Controls.Add(this.finishLine1);
+            this.Controls.Add(this.finishLine2);
+            this.Controls.Add(this.finishLine3);
+            this.Controls.Add(this.finishLine4);
+            this.Controls.Add(this.finishLine5);
+            this.Controls.Add(this.finishLine6);
+            this.Controls.Add(this.finishLine8);
+            this.Controls.Add(this.finishLine7);
             this.Name = "ActualGame";
-            this.Text = "s";
+            this.Text = "GridLock";
             this.Load += new System.EventHandler(this.ActualGame_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
@@ -929,6 +1072,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox49)).EndInit();
             this.grpGameBoard.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSelectedColour)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox50)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.finishLine1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.finishLine2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.finishLine3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.finishLine4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.finishLine5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.finishLine6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.finishLine7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.finishLine8)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1006,5 +1158,16 @@
         private System.Windows.Forms.Button btnDown;
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.Button btnLevelSelect;
+        private System.Windows.Forms.Label lblWinText;
+        private System.Windows.Forms.PictureBox pictureBox50;
+        private System.Windows.Forms.PictureBox finishLine1;
+        private System.Windows.Forms.PictureBox finishLine2;
+        private System.Windows.Forms.PictureBox finishLine3;
+        private System.Windows.Forms.PictureBox finishLine4;
+        private System.Windows.Forms.PictureBox finishLine5;
+        private System.Windows.Forms.PictureBox finishLine6;
+        private System.Windows.Forms.PictureBox finishLine7;
+        private System.Windows.Forms.PictureBox finishLine8;
+        private System.Windows.Forms.Button btnResetLvl;
     }
 }

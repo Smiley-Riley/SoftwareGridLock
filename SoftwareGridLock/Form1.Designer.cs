@@ -61,7 +61,7 @@
             this.Controls.Add(this.btnPlay);
             this.Controls.Add(this.lblIntro);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Welcome :)";
             this.ResumeLayout(false);
             this.PerformLayout();
 
