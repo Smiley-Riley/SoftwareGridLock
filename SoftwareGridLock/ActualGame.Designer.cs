@@ -111,6 +111,7 @@
             this.finishLine7 = new System.Windows.Forms.PictureBox();
             this.finishLine8 = new System.Windows.Forms.PictureBox();
             this.btnResetLvl = new System.Windows.Forms.Button();
+            this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -1169,5 +1170,6 @@
         private System.Windows.Forms.PictureBox finishLine7;
         private System.Windows.Forms.PictureBox finishLine8;
         private System.Windows.Forms.Button btnResetLvl;
+        private System.ComponentModel.BackgroundWorker backgroundWorker2;
     }
 }
