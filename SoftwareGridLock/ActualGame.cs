@@ -19,6 +19,7 @@ namespace SoftwareGridLock
         Color[] verticalMove = readFileLine(LevelSelect.levelFile, 4).Split(',').Select(colour => Color.FromName(colour)).ToArray();
         int[] endingPos = readFileLine(LevelSelect.levelFile, 5).Split(',').Select(posCoord => Convert.ToInt32(posCoord)).ToArray();
         int[] finishLinesSelected = readFileLine(LevelSelect.levelFile, 6).Split(',').Select(posCoord => Convert.ToInt32(posCoord)).ToArray();
+        bool gameWon = false;
 
         List<int> endPosArrY = new List<int>();
         List<int> endPosArrX = new List<int>();
@@ -101,218 +102,258 @@ namespace SoftwareGridLock
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            lblTimer.Text = "Time: " + ++time; //the ++ before time adds 1 to time before adding it to the label
+            lblTimer.Text = "Time: " + ++time; //the ++ Before time adds 1 to time and then adds the increased time to the label
         }
 
         private void moveCommand(string moveDirection)
         {
-            Color selectedColour = pictureBoxSelectedColour.BackColor;
-            bool canMoveHorizontal = true;
-            bool canMoveVertical = true;
-            for (int i = 0; i < horizontalMove.Length; i++)
+            if (gameWon == false)
             {
-                if (horizontalMove[i] == selectedColour) //if the block is in the horizontal move array you know that it can only move horizontal and can't move vertical
+                Color selectedColour = pictureBoxSelectedColour.BackColor;
+                bool canMoveHorizontal = true;
+                bool canMoveVertical = true;
+                for (int i = 0; i < horizontalMove.Length; i++)
                 {
-                    canMoveVertical = false;
-                    break;
+                    if (horizontalMove[i] == selectedColour) //if the block is in the horizontal move array you know that it can only move horizontal and can't move vertical
+                    {
+                        canMoveVertical = false;
+                        break;
+                    }
                 }
-            }
-            for (int i = 0; i < verticalMove.Length; i++)
-            {
-                if (verticalMove[i] == selectedColour) //same but with vertical - horizontal
+                for (int i = 0; i < verticalMove.Length; i++)
                 {
-                    canMoveHorizontal = false;
-                    break;
-                } //The reason that it's backwards like this is that the canMoves need to start true, so that the Green can move any direction if it's not in any of the catagories
-            }
-            bool canMove = true;
-            List<int> arrayX = new List<int>(); //Two arrays that store the x and y positions of any blocks of
-            List<int> arrayY = new List<int>(); //the colour going to be moved while they're being checked
+                    if (verticalMove[i] == selectedColour) //same but with vertical - horizontal
+                    {
+                        canMoveHorizontal = false;
+                        break;
+                    } //The reason that it's backwards like this is that the canMoves need to start true, so that the Green can move any direction if it's not in any of the catagories
+                }
+                bool canMove = true;
+                List<int> arrayX = new List<int>(); //Two lists that store the x and y positions of any blocks of
+                List<int> arrayY = new List<int>(); //the colour going to be moved while they're being checked
 
-            if (canMoveHorizontal)
-            {
-                if (moveDirection == "right")
+                if (canMoveHorizontal)
                 {
-                    for (int x = 0; x < 7; x++) //I'm now aware that the way the 2D array works is that the y is the horizontal axis and the x is the 
-                    {                           //vertical axis, but i'm too lazy to swap them arround so just accept it I guess
-                        for (int y = 0; y < 7; y++)
-                        {
-                            if(selectedColour == gameBoard[x,y].BackColor) //Checks if that tile is the one you're looking to move
+                    if (moveDirection == "right")
+                    {
+                        for (int x = 0; x < 7; x++) //I'm now aware that the way the 2D array works is that the y is the horizontal axis and the x is the 
+                        {                           //vertical axis, but i'm too lazy to swap them arround so just accept it I guess
+                            for (int y = 0; y < 7; y++)
                             {
-                                arrayX.Add(x);
-                                arrayY.Add(y);
-                                if (y < 6) //if y = 6, the y + 1 is out of the index
+                                if (selectedColour == gameBoard[x, y].BackColor) //Checks if that tile is the one you're looking to move
                                 {
-                                    if (gameBoard[x, y + 1].BackColor != gameBoard[x,y].BackColor && gameBoard[x, y + 1].BackColor != Color.White)
+                                    arrayX.Add(x);
+                                    arrayY.Add(y);
+                                    if (y == 6)
                                     {
-                                        canMove = false; //If the tile to the right of each of the tiles in the car are not White or not the colour of the tile
+                                        canMove = false; //If it's on the most right level it can't move right
                                     }
-                                }
-                                if (y == 6)
-                                {
-                                    canMove = false; //If it's on the most right level it can't move right
+                                    else if (y < 6) //if y = 6, the y + 1 is out of the index
+                                    {
+                                        if (gameBoard[x, y + 1].BackColor != gameBoard[x, y].BackColor && gameBoard[x, y + 1].BackColor != Color.White)
+                                        {
+                                            canMove = false; //If the tile to the right of each of the tiles in the car are not White or not the colour of the tile
+                                        }
+                                    }
                                 }
                             }
                         }
-                    }
 
 
-                }
-                if (moveDirection == "left")
-                {
-                    for (int x = 0; x < 7; x++)
-                    {
-                        for (int y = 0; y < 7; y++)
-                        {
-                            if (selectedColour == gameBoard[x, y].BackColor)
-                            {
-                                arrayX.Add(x);
-                                arrayY.Add(y);
-                                if (y > 0) 
-                                {
-                                    if (gameBoard[x, y - 1].BackColor != gameBoard[x, y].BackColor && gameBoard[x, y - 1].BackColor != Color.White)
-                                    {
-                                        canMove = false; 
-                                    }
-                                }
-                                if (y == 0)
-                                {
-                                    canMove = false;
-                                }
-                            }
-                        }
                     }
-                }
-            }
-            if (canMoveVertical)
-            {
-                if (moveDirection == "up")
-                {
-                    for (int x = 0; x < 7; x++)
+                    if (moveDirection == "left")
                     {
-                        for (int y = 0; y < 7; y++)
+                        for (int x = 0; x < 7; x++)
                         {
-                            if (selectedColour == gameBoard[x, y].BackColor)
+                            for (int y = 0; y < 7; y++)
                             {
-                                arrayX.Add(x);
-                                arrayY.Add(y);
-                                if (x > 0) 
+                                if (selectedColour == gameBoard[x, y].BackColor)
                                 {
-                                    if (gameBoard[x - 1, y].BackColor != gameBoard[x, y].BackColor && gameBoard[x - 1, y].BackColor != Color.White)
-                                    {
-                                        canMove = false; 
-                                    }
-                                }
-                                if (x == 0)
-                                {
-                                    canMove = false; 
-                                }
-                            }
-                        }
-                    }
-                }
-                if (moveDirection == "down")
-                {
-                    for (int x = 0; x < 7; x++)
-                    {
-                        for (int y = 0; y < 7; y++)
-                        {
-                            if (selectedColour == gameBoard[x, y].BackColor) 
-                            {
-                                arrayX.Add(x);
-                                arrayY.Add(y);
-                                if (x < 6)
-                                {
-                                    if (gameBoard[x + 1, y].BackColor != gameBoard[x, y].BackColor && gameBoard[x + 1, y].BackColor != Color.White)
+                                    arrayX.Add(x);
+                                    arrayY.Add(y);
+                                    if (y == 0)
                                     {
                                         canMove = false;
                                     }
-                                }
-                                if (x == 6)
-                                {
-                                    canMove = false;
+                                    else if (y > 0)
+                                    {
+                                        if (gameBoard[x, y - 1].BackColor != gameBoard[x, y].BackColor && gameBoard[x, y - 1].BackColor != Color.White)
+                                        {
+                                            canMove = false;
+                                        }
+                                    }
                                 }
                             }
                         }
                     }
                 }
-            }
-
-            if (canMove) {
-                if (moveDirection == "up" || moveDirection == "left") //This difference between up/left and right/down is so that all the blocks show in the end
+                if (canMoveVertical)
                 {
-                    for (int i = 0; i < arrayX.Count; i++) //rather than there being all white and one block left behind
+                    if (moveDirection == "up")
                     {
-                        if (moveDirection == "left") //Like if the board checking goes left - right/up - down anything going the other way will get cut off
+                        for (int x = 0; x < 7; x++)
+                        {
+                            for (int y = 0; y < 7; y++)
+                            {
+                                if (selectedColour == gameBoard[x, y].BackColor)
+                                {
+                                    arrayX.Add(x);
+                                    arrayY.Add(y);
+                                    if (x == 0)
+                                    {
+                                        canMove = false;
+                                    }
+                                    else if (x > 0)
+                                    {
+                                        if (gameBoard[x - 1, y].BackColor != gameBoard[x, y].BackColor && gameBoard[x - 1, y].BackColor != Color.White)
+                                        {
+                                            canMove = false;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if (moveDirection == "down")
+                    {
+                        for (int x = 0; x < 7; x++)
+                        {
+                            for (int y = 0; y < 7; y++)
+                            {
+                                if (selectedColour == gameBoard[x, y].BackColor)
+                                {
+                                    arrayX.Add(x);
+                                    arrayY.Add(y);
+                                    if (x == 6)
+                                    {
+                                        canMove = false;
+                                    }
+                                    else if (x < 6)
+                                    {
+                                        if (gameBoard[x + 1, y].BackColor != gameBoard[x, y].BackColor && gameBoard[x + 1, y].BackColor != Color.White)
+                                        {
+                                            canMove = false;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if (canMove)
+                {
+                    if (moveDirection == "left")
+                    {
+                        for (int i = 0; i < arrayX.Count; i++)
                         {
                             gameBoard[arrayX[i], arrayY[i]].BackColor = Color.White;
                             gameBoard[arrayX[i], arrayY[i] - 1].BackColor = selectedColour;
                         }
-                        if (moveDirection == "up")
+                    }
+                    else if (moveDirection == "up")
+                    {
+                        for (int i = 0; i < arrayX.Count; i++)
                         {
                             gameBoard[arrayX[i], arrayY[i]].BackColor = Color.White;
                             gameBoard[arrayX[i] - 1, arrayY[i]].BackColor = selectedColour;
                         }
                     }
-                }
-                if (moveDirection == "right" || moveDirection == "down") 
-                {
-                    for (int i = arrayX.Count - 1; i >= 0; i--) {
-                        if (moveDirection == "right")
-                        {
+                    else if (moveDirection == "right")
+                    {
+                        for (int i = arrayX.Count - 1; i >= 0; i--) //The reason the for loops are different is that if it goes top left - bot right while moving right
+                        {                                           //the later updates will undo the previous updates and you will end up with only one block left
                             gameBoard[arrayX[i], arrayY[i]].BackColor = Color.White;
                             gameBoard[arrayX[i], arrayY[i] + 1].BackColor = selectedColour;
                         }
-                        if (moveDirection == "down")
+                    }
+                    else if (moveDirection == "down")
+                    {
+                        for (int i = arrayX.Count - 1; i >= 0; i--)
                         {
                             gameBoard[arrayX[i], arrayY[i]].BackColor = Color.White;
                             gameBoard[arrayX[i] + 1, arrayY[i]].BackColor = selectedColour;
                         }
                     }
-                }
-            }
 
-            bool didYouWin = true;
-            for (int i = 0; i < endingPos.Length / 2; i++) //Checks that all the coordinates of where the winning tiles are (found in csv file) are green 
-            {
-                if (gameBoard[endPosArrY[i], endPosArrX[i]].BackColor != Color.Green)
-                {
-                    didYouWin = false;
-                }
-            }
-            if (didYouWin)
-            {
-                lblWinText.Show();
-                Timer.Stop();
-                DateTime end = DateTime.Now;
-                TimeSpan ts = end - start; //Compares the exact time of the start of the program and the win
-                /*string str = Convert.ToString(ts.TotalMilliseconds);
-                str = str.Split('.')[0]; //This is what I first wrote and felt really smart about but also Convert.ToInt32() is just the better option
-                int time = Convert.ToInt32(str);*/
-                int time = Convert.ToInt32(ts.TotalMilliseconds);
-                int numOfMinutes = 0;
-                while (time > 60000) //Subtracts minutes at a time until there is less than a minute of time left
-                {
-                    time -= 60000;
-                    numOfMinutes++;
-                }
-                int numOfSeconds = 0;
-                while (time > 1000) //Subtracts seconds until less than a second
-                {
-                    time -= 1000;
-                    numOfSeconds++;
-                }
-                if (numOfMinutes > 0)
-                {
-                    MessageBox.Show(Convert.ToString(numOfMinutes) + " minutes " + Convert.ToString(numOfSeconds) + " seconds " + Convert.ToString(time) + " milliseconds");
-                }
-                else if (numOfSeconds > 0)
-                {
-                    MessageBox.Show(Convert.ToString(numOfSeconds) + " seconds " + Convert.ToString(time) + " milliseconds");
-                }
-                else
-                {
-                    MessageBox.Show(Convert.ToString(time) + " milliseconds");
+
+                    /*if (moveDirection == "up" || moveDirection == "left") //This difference between up/left and right/down is so that all the blocks show in the end
+                    {
+                        for (int i = 0; i < arrayX.Count; i++) //rather than there being all white and one block left behind
+                        {
+                            if (moveDirection == "left") //Like if the board checking goes left - right/up - down anything going the other way will get cut off
+                            {
+                                gameBoard[arrayX[i], arrayY[i]].BackColor = Color.White;
+                                gameBoard[arrayX[i], arrayY[i] - 1].BackColor = selectedColour;
+                            }
+                            if (moveDirection == "up")
+                            {
+                                gameBoard[arrayX[i], arrayY[i]].BackColor = Color.White;
+                                gameBoard[arrayX[i] - 1, arrayY[i]].BackColor = selectedColour;
+                            }
+                        }
+                    }
+                    if (moveDirection == "right" || moveDirection == "down") 
+                    {
+                        for (int i = arrayX.Count - 1; i >= 0; i--) 
+                        {
+                            if (moveDirection == "right")
+                            {
+                                gameBoard[arrayX[i], arrayY[i]].BackColor = Color.White;
+                                gameBoard[arrayX[i], arrayY[i] + 1].BackColor = selectedColour;
+                            }
+                            if (moveDirection == "down")
+                            {
+                                gameBoard[arrayX[i], arrayY[i]].BackColor = Color.White;
+                                gameBoard[arrayX[i] + 1, arrayY[i]].BackColor = selectedColour;
+                            }
+                        }
+                    }
+                }*/
+                    bool didYouWin = true;
+                    for (int i = 0; i < endingPos.Length / 2; i++) //Checks that all the coordinates of where the winning tiles are (found in csv file) are green 
+                    {
+                        if (gameBoard[endPosArrY[i], endPosArrX[i]].BackColor != Color.Green)
+                        {
+                            didYouWin = false;
+                        }
+                    }
+                    if (didYouWin)
+                    {
+                        gameWon = true;
+                        lblWinText.Show();
+                        Timer.Stop();
+                        DateTime end = DateTime.Now;
+                        TimeSpan ts = end - start; //Compares the exact time of the start of the program and the win
+                        /*string str = Convert.ToString(ts.TotalMilliseconds);
+                        str = str.Split('.')[0]; //This is what I first wrote and felt really smart about but also Convert.ToInt32() is just the better option
+                        int time = Convert.ToInt32(str);*/
+                        int time = Convert.ToInt32(ts.TotalMilliseconds);
+                        int numOfMinutes = 0;
+                        while (time > 60000) //Subtracts minutes at a time until there is less than a minute of time left
+                        {
+                            time -= 60000;
+                            numOfMinutes++;
+                        }
+                        int numOfSeconds = 0;
+                        while (time > 1000) //Subtracts seconds until less than a second
+                        {
+                            time -= 1000;
+                            numOfSeconds++;
+                        }
+                        if (numOfMinutes > 0)
+                        {
+                            MessageBox.Show(Convert.ToString(numOfMinutes) + " minutes " + Convert.ToString(numOfSeconds) + " seconds " + Convert.ToString(time) + " milliseconds");
+                        }
+                        else if (numOfSeconds > 0)
+                        {
+                            MessageBox.Show(Convert.ToString(numOfSeconds) + " seconds " + Convert.ToString(time) + " milliseconds");
+                        }
+                        else
+                        {
+                            MessageBox.Show(Convert.ToString(time) + " milliseconds");
+                        }
+                    }
                 }
             }
         }
