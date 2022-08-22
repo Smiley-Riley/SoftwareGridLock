@@ -62,10 +62,5 @@ namespace SoftwareGridLock
             actGame.Show();
             this.Close();
         }
-
-       
-
-       
-
     }
 }

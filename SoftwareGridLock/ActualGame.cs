@@ -19,6 +19,7 @@ namespace SoftwareGridLock
         Color[] verticalMove = readFileLine(LevelSelect.levelFile, 4).Split(',').Select(colour => Color.FromName(colour)).ToArray();
         int[] endingPos = readFileLine(LevelSelect.levelFile, 5).Split(',').Select(posCoord => Convert.ToInt32(posCoord)).ToArray();
         int[] finishLinesSelected = readFileLine(LevelSelect.levelFile, 6).Split(',').Select(posCoord => Convert.ToInt32(posCoord)).ToArray();
+
         bool gameWon = false;
 
         List<int> endPosArrY = new List<int>();
@@ -43,6 +44,9 @@ namespace SoftwareGridLock
 
         private void ActualGame_Load(object sender, EventArgs e)
         {
+            pictureBoxSelectedColour.BackColor = colours[0];
+            lblWinText.Hide();
+            Timer.Start();
             for (int i = 1; i < 9; i++)
             {
                 if (i != finishLinesSelected[0] && i != finishLinesSelected[1]) //If the finishLines aren't the ones specificed in the file they are hidden
@@ -51,14 +55,12 @@ namespace SoftwareGridLock
                 }
             }   
 
-            pictureBoxSelectedColour.BackColor = colours[0];
-            lblWinText.Hide();
             for (int i = 0; i < endingPos.Length; i += 2)
             {
                 endPosArrY.Add(endingPos[i]);
                 endPosArrX.Add(endingPos[i + 1]);
             }
-            Timer.Start();
+            
             int index = 1;
             for (int i = 0; i < 7; i++) //Adds picture boxes to array by searching through their names (pictureBox1, pictureBox2, etc)
             {
@@ -130,27 +132,27 @@ namespace SoftwareGridLock
                 }
                 bool canMove = true;
                 List<int> arrayX = new List<int>(); //Two lists that store the x and y positions of any blocks of
-                List<int> arrayY = new List<int>(); //the colour going to be moved while they're being checked
+                List<int> arrayY = new List<int>(); //the colour going to be moved while they're being checked.
 
                 if (canMoveHorizontal)
                 {
                     if (moveDirection == "right")
                     {
-                        for (int x = 0; x < 7; x++) //I'm now aware that the way the 2D array works is that the y is the horizontal axis and the x is the 
-                        {                           //vertical axis, but i'm too lazy to swap them arround so just accept it I guess
-                            for (int y = 0; y < 7; y++)
+                        for (int y = 0; y < 7; y++)
+                        {
+                            for (int x = 0; x < 7; x++)
                             {
-                                if (selectedColour == gameBoard[x, y].BackColor) //Checks if that tile is the one you're looking to move
+                                if (selectedColour == gameBoard[y, x].BackColor) //Checks if that tile is the one you're looking to move
                                 {
                                     arrayX.Add(x);
                                     arrayY.Add(y);
-                                    if (y == 6)
+                                    if (x == 6)
                                     {
                                         canMove = false; //If it's on the most right level it can't move right
                                     }
-                                    else if (y < 6) //if y = 6, the y + 1 is out of the index
+                                    else if (x < 6) //if y = 6, the y + 1 is out of the index
                                     {
-                                        if (gameBoard[x, y + 1].BackColor != gameBoard[x, y].BackColor && gameBoard[x, y + 1].BackColor != Color.White)
+                                        if (gameBoard[y, x + 1].BackColor != gameBoard[y, x].BackColor && gameBoard[y, x + 1].BackColor != Color.White)
                                         {
                                             canMove = false; //If the tile to the right of each of the tiles in the car are not White or not the colour of the tile
                                         }
@@ -161,23 +163,23 @@ namespace SoftwareGridLock
 
 
                     }
-                    if (moveDirection == "left")
+                    else if (moveDirection == "left")
                     {
-                        for (int x = 0; x < 7; x++)
+                        for (int y = 0; y < 7; y++)
                         {
-                            for (int y = 0; y < 7; y++)
+                            for (int x = 0; x < 7; x++)
                             {
-                                if (selectedColour == gameBoard[x, y].BackColor)
+                                if (selectedColour == gameBoard[y, x].BackColor)
                                 {
                                     arrayX.Add(x);
                                     arrayY.Add(y);
-                                    if (y == 0)
+                                    if (x == 0)
                                     {
                                         canMove = false;
                                     }
-                                    else if (y > 0)
+                                    else if (x > 0)
                                     {
-                                        if (gameBoard[x, y - 1].BackColor != gameBoard[x, y].BackColor && gameBoard[x, y - 1].BackColor != Color.White)
+                                        if (gameBoard[y, x - 1].BackColor != gameBoard[y, x].BackColor && gameBoard[y, x - 1].BackColor != Color.White)
                                         {
                                             canMove = false;
                                         }
@@ -191,21 +193,21 @@ namespace SoftwareGridLock
                 {
                     if (moveDirection == "up")
                     {
-                        for (int x = 0; x < 7; x++)
+                        for (int y = 0; y < 7; y++)
                         {
-                            for (int y = 0; y < 7; y++)
+                            for (int x = 0; x < 7; x++)
                             {
-                                if (selectedColour == gameBoard[x, y].BackColor)
+                                if (selectedColour == gameBoard[y, x].BackColor)
                                 {
                                     arrayX.Add(x);
                                     arrayY.Add(y);
-                                    if (x == 0)
+                                    if (y == 0)
                                     {
                                         canMove = false;
                                     }
-                                    else if (x > 0)
+                                    else if (y > 0)
                                     {
-                                        if (gameBoard[x - 1, y].BackColor != gameBoard[x, y].BackColor && gameBoard[x - 1, y].BackColor != Color.White)
+                                        if (gameBoard[y - 1, x].BackColor != gameBoard[y, x].BackColor && gameBoard[y - 1, x].BackColor != Color.White)
                                         {
                                             canMove = false;
                                         }
@@ -214,23 +216,23 @@ namespace SoftwareGridLock
                             }
                         }
                     }
-                    if (moveDirection == "down")
+                    else if (moveDirection == "down") 
                     {
-                        for (int x = 0; x < 7; x++)
+                        for (int y = 0; y < 7; y++)
                         {
-                            for (int y = 0; y < 7; y++)
+                            for (int x = 0; x < 7; x++)
                             {
-                                if (selectedColour == gameBoard[x, y].BackColor)
+                                if (selectedColour == gameBoard[y, x].BackColor)
                                 {
                                     arrayX.Add(x);
                                     arrayY.Add(y);
-                                    if (x == 6)
+                                    if (y == 6)
                                     {
                                         canMove = false;
                                     }
-                                    else if (x < 6)
+                                    else if (y < 6)
                                     {
-                                        if (gameBoard[x + 1, y].BackColor != gameBoard[x, y].BackColor && gameBoard[x + 1, y].BackColor != Color.White)
+                                        if (gameBoard[y + 1, x].BackColor != gameBoard[y, x].BackColor && gameBoard[y + 1, x].BackColor != Color.White)
                                         {
                                             canMove = false;
                                         }
@@ -241,38 +243,50 @@ namespace SoftwareGridLock
                     }
                 }
 
-                if (canMove)
+                if (canMove) //I could put this in the seperate check if can move sections, but it's nicer having them seperated
                 {
                     if (moveDirection == "left")
                     {
                         for (int i = 0; i < arrayX.Count; i++)
                         {
-                            gameBoard[arrayX[i], arrayY[i]].BackColor = Color.White;
-                            gameBoard[arrayX[i], arrayY[i] - 1].BackColor = selectedColour;
+                            gameBoard[arrayY[i], arrayX[i]].BackColor = Color.White;
+                            gameBoard[arrayY[i], arrayX[i] - 1].BackColor = selectedColour;
                         }
                     }
                     else if (moveDirection == "up")
                     {
                         for (int i = 0; i < arrayX.Count; i++)
                         {
-                            gameBoard[arrayX[i], arrayY[i]].BackColor = Color.White;
-                            gameBoard[arrayX[i] - 1, arrayY[i]].BackColor = selectedColour;
+                            gameBoard[arrayY[i], arrayX[i]].BackColor = Color.White;
+                            gameBoard[arrayY[i] - 1, arrayX[i]].BackColor = selectedColour;
                         }
                     }
                     else if (moveDirection == "right")
                     {
                         for (int i = arrayX.Count - 1; i >= 0; i--) //The reason the for loops are different is that if it goes top left - bot right while moving right
                         {                                           //the later updates will undo the previous updates and you will end up with only one block left
-                            gameBoard[arrayX[i], arrayY[i]].BackColor = Color.White;
-                            gameBoard[arrayX[i], arrayY[i] + 1].BackColor = selectedColour;
+                            gameBoard[arrayY[i], arrayX[i]].BackColor = Color.White;
+                            gameBoard[arrayY[i], arrayX[i] + 1].BackColor = selectedColour;
                         }
                     }
                     else if (moveDirection == "down")
                     {
+                        /*for (int y = 6; y >=0 ; y--)
+                        {
+                            for (int x = 6; x >= 0; x--)
+                            {
+                                if (selectedColour == gameBoard[y, x].BackColor)  //Im stuck between whether this is better than having the two lists that store the positions
+                                {
+                                    gameBoard[y, x].BackColor = Color.White;
+                                    gameBoard[y + 1, x].BackColor = selectedColour;
+                                }
+                            }
+                        }*/
+                        
                         for (int i = arrayX.Count - 1; i >= 0; i--)
                         {
-                            gameBoard[arrayX[i], arrayY[i]].BackColor = Color.White;
-                            gameBoard[arrayX[i] + 1, arrayY[i]].BackColor = selectedColour;
+                            gameBoard[arrayY[i], arrayX[i]].BackColor = Color.White;
+                            gameBoard[arrayY[i] + 1, arrayX[i]].BackColor = selectedColour;
                         }
                     }
 
@@ -324,7 +338,7 @@ namespace SoftwareGridLock
                         lblWinText.Show();
                         Timer.Stop();
                         DateTime end = DateTime.Now;
-                        TimeSpan ts = end - start; //Compares the exact time of the start of the program and the win
+                        TimeSpan ts = end - start; //Compares the exact time of the start of the program and the win time
                         /*string str = Convert.ToString(ts.TotalMilliseconds);
                         str = str.Split('.')[0]; //This is what I first wrote and felt really smart about but also Convert.ToInt32() is just the better option
                         int time = Convert.ToInt32(str);*/
