@@ -19,6 +19,8 @@ namespace SoftwareGridLock
         Color[] verticalMove = readFileLine(LevelSelect.levelFile, 4).Split(',').Select(colour => Color.FromName(colour)).ToArray();
         int[] endingPos = readFileLine(LevelSelect.levelFile, 5).Split(',').Select(posCoord => Convert.ToInt32(posCoord)).ToArray();
         int[] finishLinesSelected = readFileLine(LevelSelect.levelFile, 6).Split(',').Select(posCoord => Convert.ToInt32(posCoord)).ToArray();
+        //These all read the file line, then split it until an array of strings at the commas, then use .Select to convert the string's to Color's or ints
+        //then create an array of that value with .ToArray();
 
         bool gameWon = false;
 
@@ -29,7 +31,7 @@ namespace SoftwareGridLock
         Button[] colourSelect = new Button[11]; //Same but with buttons
 
         int time = 0;
-        DateTime start = DateTime.Now;
+        DateTime start = DateTime.Now; //Sets starting times
 
         private static string readFileLine(string path, int line)
         {
@@ -44,8 +46,8 @@ namespace SoftwareGridLock
 
         private void ActualGame_Load(object sender, EventArgs e)
         {
-            pictureBoxSelectedColour.BackColor = colours[0];
-            lblWinText.Hide();
+            pictureBoxSelectedColour.BackColor = colours[0]; //Just gives the selected colour a colour that is on the board, not anything special
+            lblWinText.Hide(); 
             Timer.Start();
             for (int i = 1; i < 9; i++)
             {
@@ -55,7 +57,7 @@ namespace SoftwareGridLock
                 }
             }   
 
-            for (int i = 0; i < endingPos.Length; i += 2)
+            for (int i = 0; i < endingPos.Length; i += 2) //Sets the arrays for the end positions
             {
                 endPosArrY.Add(endingPos[i]);
                 endPosArrX.Add(endingPos[i + 1]);
@@ -81,7 +83,7 @@ namespace SoftwareGridLock
             int startingColoursIndex = 0;
             for (int i = 0; i < colours.Length; i++)  //Colours all of the buttons that let you select the move colour
             {
-                colourSelect[i].BackColor = colours[startingColoursIndex];/*Color.FromName(colours[startingColoursIndex]);*/
+                colourSelect[i].BackColor = colours[startingColoursIndex];
                 startingColoursIndex++;
             }
 
@@ -149,12 +151,14 @@ namespace SoftwareGridLock
                                     if (x == 6)
                                     {
                                         canMove = false; //If it's on the most right level it can't move right
+                                        break;
                                     }
                                     else if (x < 6) //if y = 6, the y + 1 is out of the index
                                     {
                                         if (gameBoard[y, x + 1].BackColor != gameBoard[y, x].BackColor && gameBoard[y, x + 1].BackColor != Color.White)
                                         {
                                             canMove = false; //If the tile to the right of each of the tiles in the car are not White or not the colour of the tile
+                                            break;
                                         }
                                     }
                                 }
@@ -163,7 +167,7 @@ namespace SoftwareGridLock
 
 
                     }
-                    else if (moveDirection == "left")
+                    else if (moveDirection == "left") //same as up just different x/y changes
                     {
                         for (int y = 0; y < 7; y++)
                         {
@@ -176,12 +180,14 @@ namespace SoftwareGridLock
                                     if (x == 0)
                                     {
                                         canMove = false;
+                                        break;
                                     }
                                     else if (x > 0)
                                     {
                                         if (gameBoard[y, x - 1].BackColor != gameBoard[y, x].BackColor && gameBoard[y, x - 1].BackColor != Color.White)
                                         {
                                             canMove = false;
+                                            break;
                                         }
                                     }
                                 }
@@ -204,12 +210,14 @@ namespace SoftwareGridLock
                                     if (y == 0)
                                     {
                                         canMove = false;
+                                        break;
                                     }
                                     else if (y > 0)
                                     {
                                         if (gameBoard[y - 1, x].BackColor != gameBoard[y, x].BackColor && gameBoard[y - 1, x].BackColor != Color.White)
                                         {
                                             canMove = false;
+                                            break;
                                         }
                                     }
                                 }
@@ -229,12 +237,14 @@ namespace SoftwareGridLock
                                     if (y == 6)
                                     {
                                         canMove = false;
+                                        break;
                                     }
                                     else if (y < 6)
                                     {
                                         if (gameBoard[y + 1, x].BackColor != gameBoard[y, x].BackColor && gameBoard[y + 1, x].BackColor != Color.White)
                                         {
                                             canMove = false;
+                                            break;
                                         }
                                     }
                                 }
@@ -243,7 +253,7 @@ namespace SoftwareGridLock
                     }
                 }
 
-                if (canMove) //I could put this in the seperate check if can move sections, but it's nicer having them seperated
+                if (canMove) //I could put this in a seperate function, but I like it like this
                 {
                     if (moveDirection == "left")
                     {
@@ -276,7 +286,7 @@ namespace SoftwareGridLock
                             for (int x = 6; x >= 0; x--)
                             {
                                 if (selectedColour == gameBoard[y, x].BackColor)  //Im stuck between whether this is better than having the two lists that store the positions
-                                {
+                                {                                                 //But it's interchangable anyways not like it affects the run time at all.
                                     gameBoard[y, x].BackColor = Color.White;
                                     gameBoard[y + 1, x].BackColor = selectedColour;
                                 }
@@ -290,40 +300,6 @@ namespace SoftwareGridLock
                         }
                     }
 
-
-                    /*if (moveDirection == "up" || moveDirection == "left") //This difference between up/left and right/down is so that all the blocks show in the end
-                    {
-                        for (int i = 0; i < arrayX.Count; i++) //rather than there being all white and one block left behind
-                        {
-                            if (moveDirection == "left") //Like if the board checking goes left - right/up - down anything going the other way will get cut off
-                            {
-                                gameBoard[arrayX[i], arrayY[i]].BackColor = Color.White;
-                                gameBoard[arrayX[i], arrayY[i] - 1].BackColor = selectedColour;
-                            }
-                            if (moveDirection == "up")
-                            {
-                                gameBoard[arrayX[i], arrayY[i]].BackColor = Color.White;
-                                gameBoard[arrayX[i] - 1, arrayY[i]].BackColor = selectedColour;
-                            }
-                        }
-                    }
-                    if (moveDirection == "right" || moveDirection == "down") 
-                    {
-                        for (int i = arrayX.Count - 1; i >= 0; i--) 
-                        {
-                            if (moveDirection == "right")
-                            {
-                                gameBoard[arrayX[i], arrayY[i]].BackColor = Color.White;
-                                gameBoard[arrayX[i], arrayY[i] + 1].BackColor = selectedColour;
-                            }
-                            if (moveDirection == "down")
-                            {
-                                gameBoard[arrayX[i], arrayY[i]].BackColor = Color.White;
-                                gameBoard[arrayX[i] + 1, arrayY[i]].BackColor = selectedColour;
-                            }
-                        }
-                    }
-                }*/
                     bool didYouWin = true;
                     for (int i = 0; i < endingPos.Length / 2; i++) //Checks that all the coordinates of where the winning tiles are (found in csv file) are green 
                     {
@@ -342,7 +318,7 @@ namespace SoftwareGridLock
                         /*string str = Convert.ToString(ts.TotalMilliseconds);
                         str = str.Split('.')[0]; //This is what I first wrote and felt really smart about but also Convert.ToInt32() is just the better option
                         int time = Convert.ToInt32(str);*/
-                        int time = Convert.ToInt32(ts.TotalMilliseconds);
+                        int time = Convert.ToInt32(ts.TotalMilliseconds); //To cut off the deciman points from ts.TotalMilliseconds
                         int numOfMinutes = 0;
                         while (time > 60000) //Subtracts minutes at a time until there is less than a minute of time left
                         {
@@ -371,6 +347,36 @@ namespace SoftwareGridLock
                 }
             }
         }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {                           //This is pretty simple, just does the same as the arrow keys but with arrow key presses
+            //capture up arrow key
+            if (keyData == Keys.Up)
+            {
+                moveCommand("up");
+                return true;
+            }
+            //capture down arrow key
+            if (keyData == Keys.Down)
+            {
+                moveCommand("down");
+                return true;
+            }
+            //capture left arrow key
+            if (keyData == Keys.Left)
+            {
+                moveCommand("left");
+                return true;
+            }
+            //capture right arrow key
+            if (keyData == Keys.Right)
+            {
+                moveCommand("right");
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
         private void selectCar(int button) { pictureBoxSelectedColour.BackColor = colours[button - 1];}
         private void button1_Click(object sender, EventArgs e) { selectCar(1); }
         private void button2_Click(object sender, EventArgs e) { selectCar(2); }
