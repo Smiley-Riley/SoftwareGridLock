@@ -164,8 +164,6 @@ namespace SoftwareGridLock
                                 }
                             }
                         }
-
-
                     }
                     else if (moveDirection == "left") //same as up just different x/y changes
                     {
@@ -318,7 +316,7 @@ namespace SoftwareGridLock
                         /*string str = Convert.ToString(ts.TotalMilliseconds);
                         str = str.Split('.')[0]; //This is what I first wrote and felt really smart about but also Convert.ToInt32() is just the better option
                         int time = Convert.ToInt32(str);*/
-                        int time = Convert.ToInt32(ts.TotalMilliseconds); //To cut off the deciman points from ts.TotalMilliseconds
+                        int time = Convert.ToInt32(ts.TotalMilliseconds); //To cut off the decimal points from ts.TotalMilliseconds
                         int numOfMinutes = 0;
                         while (time > 60000) //Subtracts minutes at a time until there is less than a minute of time left
                         {
@@ -349,27 +347,27 @@ namespace SoftwareGridLock
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
-        {                           //This is pretty simple, just does the same as the arrow keys but with arrow key presses
+        {                           //This is pretty simple, just does the same as the arrow keys but with arrow key/wasd presses
             //capture up arrow key
-            if (keyData == Keys.Up)
+            if (keyData == Keys.Up || keyData == Keys.W)
             {
                 moveCommand("up");
                 return true;
             }
             //capture down arrow key
-            if (keyData == Keys.Down)
+            if (keyData == Keys.Down || keyData == Keys.S)
             {
                 moveCommand("down");
                 return true;
             }
             //capture left arrow key
-            if (keyData == Keys.Left)
+            if (keyData == Keys.Left || keyData == Keys.A)
             {
                 moveCommand("left");
                 return true;
             }
             //capture right arrow key
-            if (keyData == Keys.Right)
+            if (keyData == Keys.Right || keyData == Keys.D)
             {
                 moveCommand("right");
                 return true;
