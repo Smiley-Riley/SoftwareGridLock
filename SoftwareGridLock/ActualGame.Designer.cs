@@ -94,10 +94,6 @@
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
-            this.btnUp = new System.Windows.Forms.Button();
-            this.btnLeft = new System.Windows.Forms.Button();
-            this.btnRight = new System.Windows.Forms.Button();
-            this.btnDown = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
             this.btnLevelSelect = new System.Windows.Forms.Button();
             this.lblWinText = new System.Windows.Forms.Label();
@@ -112,6 +108,10 @@
             this.finishLine8 = new System.Windows.Forms.PictureBox();
             this.btnResetLvl = new System.Windows.Forms.Button();
             this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
+            this.btnDown = new System.Windows.Forms.Button();
+            this.btnRight = new System.Windows.Forms.Button();
+            this.btnLeft = new System.Windows.Forms.Button();
+            this.btnUp = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -806,50 +806,6 @@
             this.button10.UseVisualStyleBackColor = false;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
-            // btnUp
-            // 
-            this.btnUp.Font = new System.Drawing.Font("Calibri", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUp.Location = new System.Drawing.Point(573, 178);
-            this.btnUp.Name = "btnUp";
-            this.btnUp.Size = new System.Drawing.Size(50, 50);
-            this.btnUp.TabIndex = 64;
-            this.btnUp.Text = "^";
-            this.btnUp.UseVisualStyleBackColor = true;
-            this.btnUp.Click += new System.EventHandler(this.btnUp_Click);
-            // 
-            // btnLeft
-            // 
-            this.btnLeft.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLeft.Location = new System.Drawing.Point(517, 234);
-            this.btnLeft.Name = "btnLeft";
-            this.btnLeft.Size = new System.Drawing.Size(50, 50);
-            this.btnLeft.TabIndex = 65;
-            this.btnLeft.Text = "<";
-            this.btnLeft.UseVisualStyleBackColor = true;
-            this.btnLeft.Click += new System.EventHandler(this.btnLeft_Click);
-            // 
-            // btnRight
-            // 
-            this.btnRight.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRight.Location = new System.Drawing.Point(631, 234);
-            this.btnRight.Name = "btnRight";
-            this.btnRight.Size = new System.Drawing.Size(50, 50);
-            this.btnRight.TabIndex = 66;
-            this.btnRight.Text = ">";
-            this.btnRight.UseVisualStyleBackColor = true;
-            this.btnRight.Click += new System.EventHandler(this.btnRight_Click);
-            // 
-            // btnDown
-            // 
-            this.btnDown.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDown.Location = new System.Drawing.Point(573, 290);
-            this.btnDown.Name = "btnDown";
-            this.btnDown.Size = new System.Drawing.Size(50, 50);
-            this.btnDown.TabIndex = 67;
-            this.btnDown.Text = "v";
-            this.btnDown.UseVisualStyleBackColor = true;
-            this.btnDown.Click += new System.EventHandler(this.btnDown_Click);
-            // 
             // button11
             // 
             this.button11.BackColor = System.Drawing.Color.White;
@@ -876,7 +832,7 @@
             // 
             this.lblWinText.AutoSize = true;
             this.lblWinText.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblWinText.Location = new System.Drawing.Point(516, 122);
+            this.lblWinText.Location = new System.Drawing.Point(506, 122);
             this.lblWinText.Name = "lblWinText";
             this.lblWinText.Size = new System.Drawing.Size(176, 37);
             this.lblWinText.TabIndex = 70;
@@ -895,7 +851,7 @@
             // finishLine1
             // 
             this.finishLine1.Image = ((System.Drawing.Image)(resources.GetObject("finishLine1.Image")));
-            this.finishLine1.Location = new System.Drawing.Point(433, 40);
+            this.finishLine1.Location = new System.Drawing.Point(433, 39);
             this.finishLine1.Name = "finishLine1";
             this.finishLine1.Size = new System.Drawing.Size(61, 47);
             this.finishLine1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -915,7 +871,7 @@
             // finishLine3
             // 
             this.finishLine3.Image = ((System.Drawing.Image)(resources.GetObject("finishLine3.Image")));
-            this.finishLine3.Location = new System.Drawing.Point(433, 146);
+            this.finishLine3.Location = new System.Drawing.Point(433, 148);
             this.finishLine3.Name = "finishLine3";
             this.finishLine3.Size = new System.Drawing.Size(61, 47);
             this.finishLine3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -925,7 +881,7 @@
             // finishLine4
             // 
             this.finishLine4.Image = ((System.Drawing.Image)(resources.GetObject("finishLine4.Image")));
-            this.finishLine4.Location = new System.Drawing.Point(433, 199);
+            this.finishLine4.Location = new System.Drawing.Point(433, 204);
             this.finishLine4.Name = "finishLine4";
             this.finishLine4.Size = new System.Drawing.Size(61, 47);
             this.finishLine4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -945,7 +901,7 @@
             // finishLine6
             // 
             this.finishLine6.Image = ((System.Drawing.Image)(resources.GetObject("finishLine6.Image")));
-            this.finishLine6.Location = new System.Drawing.Point(433, 314);
+            this.finishLine6.Location = new System.Drawing.Point(433, 315);
             this.finishLine6.Name = "finishLine6";
             this.finishLine6.Size = new System.Drawing.Size(61, 47);
             this.finishLine6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -955,7 +911,7 @@
             // finishLine7
             // 
             this.finishLine7.Image = ((System.Drawing.Image)(resources.GetObject("finishLine7.Image")));
-            this.finishLine7.Location = new System.Drawing.Point(433, 367);
+            this.finishLine7.Location = new System.Drawing.Point(433, 372);
             this.finishLine7.Name = "finishLine7";
             this.finishLine7.Size = new System.Drawing.Size(61, 47);
             this.finishLine7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -965,7 +921,7 @@
             // finishLine8
             // 
             this.finishLine8.Image = ((System.Drawing.Image)(resources.GetObject("finishLine8.Image")));
-            this.finishLine8.Location = new System.Drawing.Point(433, 420);
+            this.finishLine8.Location = new System.Drawing.Point(433, 425);
             this.finishLine8.Name = "finishLine8";
             this.finishLine8.Size = new System.Drawing.Size(61, 47);
             this.finishLine8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -983,22 +939,66 @@
             this.btnResetLvl.UseVisualStyleBackColor = false;
             this.btnResetLvl.Click += new System.EventHandler(this.btnResetLvl_Click);
             // 
+            // btnDown
+            // 
+            this.btnDown.Font = new System.Drawing.Font("Wingdings 3", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
+            this.btnDown.Location = new System.Drawing.Point(566, 290);
+            this.btnDown.Name = "btnDown";
+            this.btnDown.Size = new System.Drawing.Size(50, 50);
+            this.btnDown.TabIndex = 83;
+            this.btnDown.Text = "q";
+            this.btnDown.UseVisualStyleBackColor = true;
+            this.btnDown.Click += new System.EventHandler(this.btnDown_Click);
+            // 
+            // btnRight
+            // 
+            this.btnRight.Font = new System.Drawing.Font("Wingdings 3", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
+            this.btnRight.Location = new System.Drawing.Point(620, 237);
+            this.btnRight.Name = "btnRight";
+            this.btnRight.Size = new System.Drawing.Size(50, 50);
+            this.btnRight.TabIndex = 82;
+            this.btnRight.Text = "u";
+            this.btnRight.UseVisualStyleBackColor = true;
+            this.btnRight.Click += new System.EventHandler(this.btnRight_Click);
+            // 
+            // btnLeft
+            // 
+            this.btnLeft.Font = new System.Drawing.Font("Wingdings 3", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
+            this.btnLeft.Location = new System.Drawing.Point(512, 237);
+            this.btnLeft.Name = "btnLeft";
+            this.btnLeft.Size = new System.Drawing.Size(50, 50);
+            this.btnLeft.TabIndex = 81;
+            this.btnLeft.Text = "t";
+            this.btnLeft.UseVisualStyleBackColor = true;
+            this.btnLeft.Click += new System.EventHandler(this.btnLeft_Click);
+            // 
+            // btnUp
+            // 
+            this.btnUp.Font = new System.Drawing.Font("Wingdings 3", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
+            this.btnUp.Location = new System.Drawing.Point(566, 183);
+            this.btnUp.Name = "btnUp";
+            this.btnUp.Size = new System.Drawing.Size(50, 50);
+            this.btnUp.TabIndex = 80;
+            this.btnUp.Text = "p";
+            this.btnUp.UseVisualStyleBackColor = true;
+            this.btnUp.Click += new System.EventHandler(this.btnUp_Click);
+            // 
             // ActualGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.ClientSize = new System.Drawing.Size(712, 612);
+            this.Controls.Add(this.btnDown);
+            this.Controls.Add(this.btnRight);
+            this.Controls.Add(this.btnLeft);
+            this.Controls.Add(this.btnUp);
             this.Controls.Add(this.btnResetLvl);
             this.Controls.Add(this.pictureBoxSelectedColour);
             this.Controls.Add(this.pictureBox50);
             this.Controls.Add(this.lblWinText);
             this.Controls.Add(this.btnLevelSelect);
             this.Controls.Add(this.button11);
-            this.Controls.Add(this.btnDown);
-            this.Controls.Add(this.btnRight);
-            this.Controls.Add(this.btnLeft);
-            this.Controls.Add(this.btnUp);
             this.Controls.Add(this.button10);
             this.Controls.Add(this.button9);
             this.Controls.Add(this.button8);
@@ -1153,10 +1153,6 @@
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button button10;
-        private System.Windows.Forms.Button btnUp;
-        private System.Windows.Forms.Button btnLeft;
-        private System.Windows.Forms.Button btnRight;
-        private System.Windows.Forms.Button btnDown;
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.Button btnLevelSelect;
         private System.Windows.Forms.Label lblWinText;
@@ -1171,5 +1167,9 @@
         private System.Windows.Forms.PictureBox finishLine8;
         private System.Windows.Forms.Button btnResetLvl;
         private System.ComponentModel.BackgroundWorker backgroundWorker2;
+        private System.Windows.Forms.Button btnDown;
+        private System.Windows.Forms.Button btnRight;
+        private System.Windows.Forms.Button btnLeft;
+        private System.Windows.Forms.Button btnUp;
     }
 }
