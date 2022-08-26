@@ -112,6 +112,7 @@
             this.btnRight = new System.Windows.Forms.Button();
             this.btnLeft = new System.Windows.Forms.Button();
             this.btnUp = new System.Windows.Forms.Button();
+            this.btnInstructions = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -983,12 +984,24 @@
             this.btnUp.UseVisualStyleBackColor = true;
             this.btnUp.Click += new System.EventHandler(this.btnUp_Click);
             // 
+            // btnInstructions
+            // 
+            this.btnInstructions.BackColor = System.Drawing.Color.Linen;
+            this.btnInstructions.Location = new System.Drawing.Point(592, 66);
+            this.btnInstructions.Name = "btnInstructions";
+            this.btnInstructions.Size = new System.Drawing.Size(108, 20);
+            this.btnInstructions.TabIndex = 84;
+            this.btnInstructions.Text = "Instructions";
+            this.btnInstructions.UseVisualStyleBackColor = false;
+            this.btnInstructions.Click += new System.EventHandler(this.btnInstructions_Click);
+            // 
             // ActualGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.ClientSize = new System.Drawing.Size(712, 612);
+            this.Controls.Add(this.btnInstructions);
             this.Controls.Add(this.btnDown);
             this.Controls.Add(this.btnRight);
             this.Controls.Add(this.btnLeft);
@@ -1171,5 +1184,6 @@
         private System.Windows.Forms.Button btnRight;
         private System.Windows.Forms.Button btnLeft;
         private System.Windows.Forms.Button btnUp;
+        private System.Windows.Forms.Button btnInstructions;
     }
 }

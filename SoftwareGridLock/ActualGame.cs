@@ -406,5 +406,10 @@ namespace SoftwareGridLock
             actualGame.Show();
             this.Close();
         }
+
+        private void btnInstructions_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("The aim of the game is the get the Green block in between the finish lines! Select the Colour on the bottom row and move it using the arrows or the arrow/wasd keys on your keyboard. Have fun!");
+        }
     }
 }
